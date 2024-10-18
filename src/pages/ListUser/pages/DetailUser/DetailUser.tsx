@@ -1,12 +1,11 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
+import { Helmet } from "react-helmet-async"
+import { useNavigate, useParams } from "react-router-dom"
 import { userAPI } from "src/apis/user.api"
 import { TypeUser } from "src/types/branches.type"
 
 export default function DetailUser() {
   const { nameId } = useParams()
-
-  // const navigate = useNavigate()
 
   const getUserDetailQuery = useQuery({
     queryKey: ["roomDetail", nameId],
@@ -16,19 +15,40 @@ export default function DetailUser() {
         controller.abort()
       }, 10000)
       return userAPI.detailUser(nameId as string)
-    },
-    retry: 1, // số lần fetch lại khi thất bại
-    placeholderData: keepPreviousData, // giữ data cũ
-    staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
+    }
   })
   const userDetailData = getUserDetailQuery.data?.data as TypeUser
 
+  const navigate = useNavigate()
+
+  const handleBack = () => {
+    navigate(-1)
+  }
+
   return (
     <div className="py-4 px-6 relative">
+      <Helmet>
+        <title>Chi tiết người dùng</title>
+        <meta name="description" content="Quản lý người dùng" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
-        <h1 className="text-base uppercase text-gray-600 font-semibold">Quản lý phòng</h1>
+        <button onClick={handleBack} className="text-sm flex items-center hover:text-gray-400 duration-200">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-4 w-4"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
+          Trở lại
+        </button>
+        <h1 className="ml-1 text-base uppercase text-gray-600 font-semibold">Quản lý người dùng</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
-        <span className="text-sm text-[#3a86ff]">Chi tiết phòng</span>
+        <span className="text-sm text-[#3a86ff]">Thông tin người dùng</span>
       </div>
 
       {!getUserDetailQuery.isFetching && (

@@ -1,12 +1,20 @@
 const plugin = require("tailwindcss/plugin")
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    darkMode: ["class"],
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   corePlugins: {
     container: false // tắt class container mặc định
   },
   theme: {
-    extend: {}
+  	extend: {
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		colors: {}
+  	}
   },
   plugins: [
     plugin(function ({ addComponents, theme }) {
@@ -18,6 +26,7 @@ module.exports = {
           marginRight: "auto"
         }
       })
-    })
-  ]
+    }),
+      require("tailwindcss-animate")
+]
 }

@@ -1,13 +1,15 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
+import { Helmet } from "react-helmet-async"
 import { useNavigate } from "react-router-dom"
 import { branchAPI } from "src/apis/branch.api"
 import Pagination from "src/components/Pagination"
 import { path } from "src/constants/path"
 import { TypeBranch } from "src/types/branches.type"
 
-export default function ManageBranch() {
+export default function ListBranch() {
   const [currentPage, setCurrentPage] = useState(1)
+  const navigate = useNavigate()
 
   const getBranchListQuery = useQuery({
     queryKey: ["branchList", currentPage],
@@ -34,24 +36,29 @@ export default function ManageBranch() {
     setCurrentPage(numberPage)
   }
 
-  const navigate = useNavigate()
-
   const handleNavigate = () => {
     navigate(path.createBranch, {
       state: currentPage
     })
   }
 
-  const handleDetailBranch = (id: string) => {
-    navigate(`${path.listBranch}/detail/${id}`)
+  const handleNavigateUpdate = (id: string) => {
+    navigate(`${path.listBranch}/edit/${id}`, {
+      state: currentPage
+    })
   }
 
-  const handleUpdateBranch = (id: string) => {
-    navigate(`${path.listBranch}/edit/${id}`)
+  const handleNavigateDetail = (id: string) => {
+    navigate(`${path.listBranch}/detail/${id}`)
   }
 
   return (
     <div className="py-4 px-6 relative">
+      <Helmet>
+        <title>Quản lý chi nhánh</title>
+        <meta name="description" content="Quản lý chi nhánh" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <h1 className="text-base uppercase text-gray-600 font-semibold">Quản lý chi nhánh</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
@@ -59,7 +66,7 @@ export default function ManageBranch() {
       </div>
 
       <div className="mt-4 p-4 bg-white">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-col md:flex-row gap-2">
           <form>
             <div className="flex items-center justify-center">
               <input
@@ -102,29 +109,44 @@ export default function ManageBranch() {
             </svg>
           </button>
         </div>
-        <table className="mt-4 w-full bg-white border border-gray-200 rounded-lg">
-          <thead>
-            <tr className="bg-[#e9ecef]">
-              <th className="py-2 px-4 border-b text-sm">Mã chi nhánh</th>
-              <th className="py-2 px-4 border-b text-sm">Tên chi nhánh</th>
-              <th className="py-2 px-4 border-b text-sm">Thương hiệu</th>
-              <th className="py-2 px-4 border-b text-sm">Tỉnh/thành phố</th>
-              <th className="py-2 px-4 border-b text-sm">Phường/quận</th>
-              <th className="py-2 px-4 border-b text-sm">Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className="mt-4 w-full bg-white border border-gray-200 rounded-lg">
+          <div className="bg-[#e9ecef] grid grid-cols-6">
+            <div className="py-2 px-4 border-b text-sm col-span-2 md:col-span-1 lg:col-span-1 text-center">
+              Mã chi nhánh
+            </div>
+            <div className="py-2 px-4 border-b text-sm col-span-2 md:col-span-2 lg:col-span-1 text-center">
+              Tên chi nhánh
+            </div>
+            <div className="py-2 px-4 border-b text-sm hidden col-span-0 md:block md:col-span-2 lg:col-span-1 text-center">
+              Thương hiệu
+            </div>
+            <div className="py-2 px-4 border-b text-sm hidden col-span-0 lg:block lg:col-span-1 col-span-1 text-center">
+              Tỉnh/thành phố
+            </div>
+            <div className="py-2 px-4 border-b text-sm hidden col-span-0 lg:block lg:col-span-1 text-center">
+              Phường/quận
+            </div>
+            <div className="py-2 px-4 border-b text-sm col-span-2 md:col-span-1 text-center">Thao tác</div>
+          </div>
+          <div className="w-full">
             {!getBranchListQuery.isFetching &&
               currentList.map((item) => (
-                <tr key={item.id} className="border-b">
-                  <td className="py-2 px-4 text-center text-sm">{item.id}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.name}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.trademark}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.province}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.ward}</td>
-                  <td className="py-2 px-4 text-center">
+                <tr key={item.id} className="border-b grid grid-cols-6">
+                  <td className="py-2 px-4 text-center text-sm col-span-2 md:col-span-1 lg:col-span-1">{item.id}</td>
+                  <td className="py-2 px-4 text-center text-sm col-span-2 md:col-span-2 lg:col-span-1">{item.name}</td>
+                  <td className="py-2 px-4 text-center text-sm hidden col-span-0 md:block md:col-span-2 lg:col-span-1">
+                    {item.trademark}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                    {item.province}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                    {item.ward}
+                  </td>
+
+                  <td className="py-2 px-4 text-center col-span-2 md:col-span-1">
                     <div className="flex items-center justify-center gap-2 ">
-                      <button onClick={() => handleUpdateBranch(item.id as string)}>
+                      <button onClick={() => handleNavigateUpdate(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -140,7 +162,7 @@ export default function ManageBranch() {
                           />
                         </svg>
                       </button>
-                      <button onClick={() => handleDetailBranch(item.id as string)}>
+                      <button onClick={() => handleNavigateDetail(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -176,8 +198,8 @@ export default function ManageBranch() {
                   </td>
                 </tr>
               ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
         <div className="my-4 flex justify-center">
           <Pagination
             totalOfPage={totalItem}

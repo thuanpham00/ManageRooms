@@ -3,19 +3,21 @@ import { lazy, Suspense } from "react"
 import { useRoutes } from "react-router-dom"
 import MainLayout from "src/layouts/MainLayout"
 import MainLayout2 from "src/layouts/MainLayout2"
-import DetailRoom from "src/pages/DetailRoom"
-import UpdateRoom from "src/pages/UpdateRoom"
-import ManageUser from "src/pages/ManageUser"
-import UpdateUser from "src/pages/UpdateUser"
-import DetailUser from "src/pages/DetailUser"
 
-const ManageBranch = lazy(() => import("../pages/ManageBranch")) // - dùng kĩ thuật Lazy load - lướt tới đâu load tới đó
-const CreateBranch = lazy(() => import("../pages/CreateBranch"))
-const UpdateBranch = lazy(() => import("../pages/UpdateBranch")) // - dùng kĩ thuật Lazy load - lướt tới đâu load tới đó
-const DetailBranch = lazy(() => import("../pages/DetailBranch"))
+const ListBranch = lazy(() => import("../pages/ListBranch"))
+const CreateBranch = lazy(() => import("../pages/ListBranch/pages/CreateBranch"))
+const UpdateBranch = lazy(() => import("../pages/ListBranch/pages/UpdateBranch"))
+const DetailBranch = lazy(() => import("../pages/ListBranch/pages/DetailBranch"))
 
-const ManageRoom = lazy(() => import("../pages/ManageRoom")) // - dùng kĩ thuật Lazy load - lướt tới đâu load tới đó
-const CreateRoom = lazy(() => import("../pages/CreateRoom"))
+const ListRoom = lazy(() => import("../pages/ListRoom"))
+const CreateRoom = lazy(() => import("../pages/ListRoom/pages/CreateRoom"))
+const UpdateRoom = lazy(() => import("../pages/ListRoom/pages/UpdateRoom"))
+const DetailRoom = lazy(() => import("../pages/ListRoom/pages/DetailRoom"))
+
+const ListUser = lazy(() => import("../pages/ListUser"))
+const UpdateUser = lazy(() => import("../pages/ListUser/pages/UpdateUser"))
+const DetailUser = lazy(() => import("../pages/ListUser/pages/DetailUser"))
+
 export default function AppRouter() {
   const useRouterApp = useRoutes([
     {
@@ -31,7 +33,16 @@ export default function AppRouter() {
               index: true,
               element: (
                 <Suspense>
-                  <ManageBranch />
+                  <ListBranch />
+                </Suspense>
+              )
+            },
+            {
+              path: path.listBranch,
+              index: true,
+              element: (
+                <Suspense>
+                  <ListBranch />
                 </Suspense>
               )
             },
@@ -41,14 +52,6 @@ export default function AppRouter() {
               element: (
                 <Suspense>
                   <CreateBranch />
-                </Suspense>
-              )
-            },
-            {
-              path: path.listBranch,
-              element: (
-                <Suspense>
-                  <ManageBranch />
                 </Suspense>
               )
             },
@@ -72,7 +75,7 @@ export default function AppRouter() {
               path: path.listRoom,
               element: (
                 <Suspense>
-                  <ManageRoom />
+                  <ListRoom />
                 </Suspense>
               )
             },
@@ -100,12 +103,11 @@ export default function AppRouter() {
                 </Suspense>
               )
             },
-
             {
               path: path.listUser,
               element: (
                 <Suspense>
-                  <ManageUser />
+                  <ListUser />
                 </Suspense>
               )
             },

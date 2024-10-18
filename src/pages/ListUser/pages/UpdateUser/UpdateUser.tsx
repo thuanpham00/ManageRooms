@@ -1,17 +1,20 @@
-import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { path } from "src/constants/path"
 import { TypeUser } from "src/types/branches.type"
 import { toast } from "react-toastify"
 import { userAPI } from "src/apis/user.api"
+import { Helmet } from "react-helmet-async"
 
 type FormData = TypeUser
 
 export default function UpdateUser() {
-  const { nameId } = useParams()
-
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
+  const { state } = useLocation()
+
+  const { nameId } = useParams()
 
   const getUserDetailQuery = useQuery({
     queryKey: ["userDetail", nameId],
@@ -21,10 +24,7 @@ export default function UpdateUser() {
         controller.abort()
       }, 10000)
       return userAPI.detailUser(nameId as string)
-    },
-    retry: 1, // số lần fetch lại khi thất bại
-    placeholderData: keepPreviousData, // giữ data cũ
-    staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
+    }
   })
   const userDetailData = getUserDetailQuery.data?.data as TypeUser
 
@@ -56,7 +56,7 @@ export default function UpdateUser() {
         onSuccess: () => {
           toast.success("Cập nhật người dùng thành công")
           navigate(path.listUser)
-          window.location.reload() // Cập nhật lại trang
+          queryClient.invalidateQueries({ queryKey: ["userList", state] })
         },
         onError: (error) => {
           toast.error(error.message)
@@ -71,6 +71,11 @@ export default function UpdateUser() {
 
   return (
     <div className="py-4 px-6 relative">
+      <Helmet>
+        <title>Cập nhật người dùng</title>
+        <meta name="description" content="Quản lý người dùng" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <button onClick={handleBack} className="text-sm flex items-center hover:text-gray-400 duration-200">
           <svg

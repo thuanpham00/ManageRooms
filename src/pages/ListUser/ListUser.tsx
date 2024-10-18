@@ -1,13 +1,14 @@
 import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { userAPI } from "src/apis/user.api"
 import Pagination from "src/components/Pagination"
 import { path } from "src/constants/path"
 import { TypeUser } from "src/types/branches.type"
 
-export default function ManageUser() {
+export default function ListUser() {
   const [currentPage, setCurrentPage] = useState(1)
   const getUserList = useQuery({
     queryKey: ["userList", currentPage],
@@ -36,12 +37,10 @@ export default function ManageUser() {
 
   const navigate = useNavigate()
 
-  const handleDetailUser = (id: string) => {
-    navigate(`${path.listUser}/detail/${id}`)
-  }
-
   const handleUpdateUser = (id: string) => {
-    navigate(`${path.listUser}/edit/${id}`)
+    navigate(`${path.listUser}/edit/${id}`, {
+      state: currentPage
+    })
   }
 
   const deleteUserMutation = useMutation({
@@ -61,6 +60,11 @@ export default function ManageUser() {
 
   return (
     <div className="py-4 px-6">
+      <Helmet>
+        <title>Quản lý người dùng</title>
+        <meta name="description" content="Quản lý người dùng" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <h1 className="text-base uppercase text-gray-600 font-semibold">Quản lý người dùng</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
@@ -134,7 +138,7 @@ export default function ManageUser() {
                           />
                         </svg>
                       </button>
-                      <button onClick={() => handleDetailUser(item.id as string)}>
+                      <Link to={`${path.listUser}/detail/${item.id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -149,7 +153,7 @@ export default function ManageUser() {
                             d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
                           />
                         </svg>
-                      </button>
+                      </Link>
                       <button onClick={() => handleDeleteUser(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

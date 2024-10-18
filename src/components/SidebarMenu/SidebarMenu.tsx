@@ -10,6 +10,7 @@ export default function SidebarMenu() {
           <img src={logoSideBar} alt="logo sidebar" className="w-full h-full object-contain" />
         </Link>
       </div>
+
       <div className="mt-4">
         <span className="text-gray-400 text-sm py-2 uppercase">Quản lý</span>
         <nav className="mt-2">

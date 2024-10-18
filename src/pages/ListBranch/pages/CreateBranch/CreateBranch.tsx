@@ -1,25 +1,20 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
+import { Helmet } from "react-helmet-async"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { branchAPI } from "src/apis/branch.api"
 import { path } from "src/constants/path"
+import { TypeBranch } from "src/types/branches.type"
 
-export type FormData = {
-  id: string
-  name: string
-  trademark: string
-  description: string[]
-  url: string
-  province: string
-  ward: string
-  best_comforts: string[]
-  location: string
-  images: string[]
-}
+type FormData = TypeBranch
 
 export default function CreateBranch() {
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+  const { state } = useLocation()
+
   const { handleSubmit, register, reset, setValue } = useForm<FormData>()
   const [images, setImages] = useState<string[]>([])
 
@@ -29,13 +24,12 @@ export default function CreateBranch() {
     }
   })
 
-  const navigate = useNavigate()
   const onSubmit = handleSubmit((data) => {
     createBranchMutation.mutate(data, {
       onSuccess: () => {
         toast.success("Tạo chi nhánh thành công")
         navigate(path.listBranch)
-        window.location.reload()
+        queryClient.invalidateQueries({ queryKey: ["branchList", state] })
       },
       onError: (error) => {
         toast.error(error.message)
@@ -69,6 +63,11 @@ export default function CreateBranch() {
 
   return (
     <div className="py-4 px-6">
+      <Helmet>
+        <title>Thêm chi nhánh</title>
+        <meta name="description" content="Quản lý chi nhánh" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <button onClick={handleBack} className="text-sm flex items-center hover:text-gray-400 duration-200">
           <svg
@@ -88,7 +87,10 @@ export default function CreateBranch() {
         <span className="text-sm text-[#3a86ff]">Thêm chi nhánh</span>
       </div>
 
-      <form onSubmit={onSubmit} className="mt-2 p-4 bg-white rounded shadow-md overflow-y-scroll h-[550px]">
+      <form
+        onSubmit={onSubmit}
+        className="mt-2 p-4 bg-white rounded shadow-md lg:overflow-y-scroll h-auto lg:h-[550px]"
+      >
         <h2 className="text-xl font-bold mb-4">Thêm Chi Nhánh</h2>
 
         <div>
@@ -98,7 +100,7 @@ export default function CreateBranch() {
               <input
                 type="text"
                 required
-                className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block md:w-[200px] p-2 border border-gray-300 rounded text-sm"
                 {...register("id")}
               />
             </div>

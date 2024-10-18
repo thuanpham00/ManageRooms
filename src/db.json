@@ -1,7 +1,7 @@
 {
   "chi-nhanh": [
     {
-      "name": "Thuan pham",
+      "name": "dataaaa",
       "trademark": "gate_boutique_da_latss",
       "description": "Một khách sạn có gu tọa lạc tại gần quận 1, hoàn hảo cho những du khách trẻ đang tìm kiếm một kỳ nghỉ sôi động và phong cách. Tận hưởng buổi sáng đầy năng lượng cùng tách cafe tại EveryHalf hoặc nuông chiều bản thân với Face Fox Wash ngay tại khách sạn.,Nạp năng lượng cho bản thân với không gian view xanh trong căn phòng thoải mái nhất được trang bị TV thông minh. Đối với những vị khách yêu thích vận động, phòng gym của khách sạn sẽ giúp bạn luôn cảm thấy sảng khoái.",
       "url": "hahaa",
@@ -123,72 +123,100 @@
       ]
     },
     {
-      "id": "6",
-      "name": "Hội An Ancient House",
-      "trademark": "heritage_villa",
-      "description": [
-        "Nằm giữa lòng Hội An cổ kính, khách sạn này mang đến sự kết hợp giữa nét đẹp văn hóa và sự thoải mái hiện đại.",
-        "Thư giãn với không gian yên bình và khám phá nét đẹp văn hóa của phố cổ Hội An."
-      ],
-      "url": "hoi-an-ancient-house",
-      "province": "quang_nam",
-      "ward": "hoi_an",
-      "best_comforts": [
-        "heritage_tour",
-        "traditional_spa"
-      ],
-      "location": "35 Trần Hưng Đạo, Hội An, Quảng Nam",
+      "name": "vung tau",
+      "trademark": "a",
+      "description": "a",
+      "url": "a",
+      "province": "a",
+      "ward": "a",
+      "location": "a",
+      "best_comforts": "a",
       "images": [
-        "media/1729148996112-hoian1.jpg.webp",
-        "media/1729148996113-hoian2.jpg.webp",
-        "media/1729148996114-hoian3.jpg.webp"
+        "blob:http://localhost:3000/5358d5fc-38e3-4bf2-96a2-744d8bbce1b8"
+      ],
+      "id": "6"
+    },
+    {
+      "name": "minh thuan ne",
+      "trademark": "ga",
+      "description": "ga",
+      "url": "ag",
+      "province": "a",
+      "ward": "a",
+      "location": "a",
+      "best_comforts": "a",
+      "images": [
+        "blob:http://localhost:3000/f2cc506e-363e-47d0-88ad-eabf1896bebb"
+      ],
+      "id": "7"
+    },
+    {
+      "id": "8",
+      "name": "nn",
+      "trademark": "nn",
+      "description": "nn",
+      "url": "nnn",
+      "province": "n",
+      "ward": "n",
+      "location": "n",
+      "best_comforts": "n",
+      "images": [
+        "blob:http://localhost:3000/1e73c44e-d501-43f3-a235-3fb0b7983b3f"
       ]
     },
     {
-      "id": "7",
-      "name": "thuan ",
-      "trademark": "thuan pham",
-      "description": "thuan ne",
-      "url": "http://localhost:3000/branchs/create",
-      "province": "tay ninh",
-      "ward": "hoa thanh",
-      "location": "long hoa",
-      "best_comforts": "thuan",
+      "name": "nha trang",
+      "trademark": "cc",
+      "description": "cc",
+      "url": "cc",
+      "province": "cc",
+      "ward": "ccc",
+      "location": "cc",
+      "best_comforts": "cc",
       "images": [
-        "blob:http://localhost:3000/8b2a1b59-7453-495c-8e86-e8a74c37d880"
+        "blob:http://localhost:3000/a6bc7875-4b7d-405f-bacd-905d65178263"
+      ],
+      "id": "10"
+    },
+    {
+      "id": "11",
+      "name": "aaa",
+      "trademark": "aa",
+      "description": "aa",
+      "url": "aaa",
+      "province": "aa",
+      "ward": "aaa",
+      "location": "aa",
+      "best_comforts": "aaa",
+      "images": [
+        "blob:http://localhost:3000/71ad85c1-7cc4-45ee-a3bd-8632714b4618"
       ]
     }
   ],
   "phong": [
     {
-      "id": "1",
       "branch_id": "1",
-      "price_per_night": 1400000,
-      "price_per_month": 42000000,
-      "name": "Deluxe Park View",
-      "description": [
-        "Nâng tầm kỳ nghỉ của bạn tại Deluxe Park View, nơi có cảnh quan thành phố tuyệt đẹp cùng thiết kế tinh tế.",
-        "Căn phòng này là sự lựa chọn hoàn hảo cho cả khách du lịch và khách đi công tác qua sự kết hợp hài hòa giữa trải nghiệm thoải mái và tiện nghi hiện đại."
-      ],
-      "comforts": [
-        "free_laundry_room",
-        "cleaning_services"
-      ],
+      "price_per_night": "1400000",
+      "price_per_month": "42000000",
+      "name": "aaaaaaabbbb",
+      "description": "Nâng tầm kỳ nghỉ của bạn tại Deluxe Park View, nơi có cảnh quan thành phố tuyệt đẹp cùng thiết kế tinh tế.,Căn phòng này là sự lựa chọn hoàn hảo cho cả khách du lịch và khách đi công tác qua sự kết hợp hài hòa giữa trải nghiệm thoải mái và tiện nghi hiện đại.",
+      "comforts": "free_laundry_room,cleaning_services",
       "bed_type": "king",
-      "booking_turn": 0,
-      "stock": 20,
-      "acreage": 24,
+      "booking_turn": "0",
+      "stock": "20",
+      "acreage": "24",
       "available_from": "2024-10-05T03:07:00.106Z",
       "available_to": "2024-10-05T03:40:20.106Z",
-      "max_adults": 2,
-      "max_children": 2,
-      "max_babies": 2,
+      "max_adults": "2",
+      "max_children": "2",
+      "max_babies": "2",
       "images": [
         "media/1729149043373-12uhaawdhdhhaw.jpg.webp",
         "media/1729149043379-1212631.jpg.webp",
         "media/1729149043380-1230288.jpg.webp",
         "media/1729149043382-1231048.jpg.webp"
-      ]
+      ],
+      "id": "1"
     },
     {
       "id": "2",
@@ -330,18 +358,39 @@
         "blob:http://localhost:3000/607f191c-b4a9-4e2d-9167-fa8042b2a5e6"
       ],
       "id": "6"
+    },
+    {
+      "id": "7",
+      "branch_id": "2",
+      "name": "a",
+      "price_per_night": "a",
+      "price_per_month": "a",
+      "description": "a",
+      "bed_type": "â",
+      "comforts": "a",
+      "acreage": "a",
+      "booking_turn": "a",
+      "stock": "a",
+      "available_from": "a",
+      "available_to": "a",
+      "max_adults": "a",
+      "max_children": "a",
+      "max_babies": "a",
+      "images": [
+        "blob:http://localhost:3000/e1c8d034-b072-4609-aa4c-875b158d88a1"
+      ]
     }
   ],
   "users": [
     {
       "email": "phamthuan912@example.com",
       "phone": "+123456789",
-      "fullname": "Pham Minh Thuan",
+      "fullname": "ssssaaa",
       "nationality": "Việt Nam",
       "last_booking": "2024-10-10T12:00:00Z",
       "nights": "5",
       "books": "3",
-      "update_at": "Fri Oct 18 2024 00:16:44 GMT+0700 (Indochina Time)",
+      "update_at": "Fri Oct 18 2024 12:50:42 GMT+0700 (Indochina Time)",
       "roles": "admin",
       "id": "1"
     }

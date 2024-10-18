@@ -1,12 +1,11 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
+import { Helmet } from "react-helmet-async"
+import { useNavigate, useParams } from "react-router-dom"
 import { roomAPI } from "src/apis/room.api"
 import { TypeRoom } from "src/types/branches.type"
 
 export default function DetailRoom() {
   const { nameId } = useParams()
-
-  // const navigate = useNavigate()
 
   const getRoomDetailQuery = useQuery({
     queryKey: ["roomDetail", nameId],
@@ -16,23 +15,44 @@ export default function DetailRoom() {
         controller.abort()
       }, 10000)
       return roomAPI.detailRoom(nameId as string)
-    },
-    retry: 1, // số lần fetch lại khi thất bại
-    placeholderData: keepPreviousData, // giữ data cũ
-    staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
+    }
   })
   const roomDetailData = getRoomDetailQuery.data?.data as TypeRoom
 
+  const navigate = useNavigate()
+
+  const handleBack = () => {
+    navigate(-1)
+  }
+
   return (
     <div className="py-4 px-6 relative">
+      <Helmet>
+        <title>Chi tiết phòng</title>
+        <meta name="description" content="Quản lý phòng" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
-        <h1 className="text-base uppercase text-gray-600 font-semibold">Quản lý phòng</h1>
+        <button onClick={handleBack} className="text-sm flex items-center hover:text-gray-400 duration-200">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-4 w-4"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
+          Trở lại
+        </button>
+        <h1 className="ml-1 text-base uppercase text-gray-600 font-semibold">Quản lý phòng</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
-        <span className="text-sm text-[#3a86ff]">Chi tiết phòng</span>
+        <span className="text-sm text-[#3a86ff]">Thông tin phòng</span>
       </div>
 
       {!getRoomDetailQuery.isFetching && (
-        <form className="mt-2 p-4 bg-white rounded shadow-md overflow-y-scroll h-[550px]">
+        <form className="mt-2 p-4 bg-white rounded shadow-md lg:overflow-y-scroll h-auto lg:h-[550px]">
           <h2 className="text-xl font-bold mb-4">Thông tin chi tiết phòng</h2>
 
           <div>

@@ -1,13 +1,16 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
+import { Helmet } from "react-helmet-async"
 import { useNavigate } from "react-router-dom"
 import { roomAPI } from "src/apis/room.api"
 import Pagination from "src/components/Pagination"
 import { path } from "src/constants/path"
 import { TypeRoom } from "src/types/branches.type"
 
-export default function ManageRoom() {
+export default function ListRoom() {
   const [currentPage, setCurrentPage] = useState(1)
+  const navigate = useNavigate()
+
   const getBranchList = useQuery({
     queryKey: ["roomList", currentPage],
     queryFn: () => {
@@ -33,24 +36,29 @@ export default function ManageRoom() {
     setCurrentPage(numberPage)
   }
 
-  const navigate = useNavigate()
-
   const handleNavigate = () => {
     navigate(path.createRoom, {
       state: currentPage
     })
   }
 
-  const handleDetailRoom = (id: string) => {
-    navigate(`${path.listRoom}/detail/${id}`)
+  const handleNavigateUpdate = (id: string) => {
+    navigate(`${path.listRoom}/edit/${id}`, {
+      state: currentPage
+    })
   }
 
-  const handleUpdateRoom = (id: string) => {
-    navigate(`${path.listRoom}/edit/${id}`)
+  const handleNavigateDetail = (id: string) => {
+    navigate(`${path.listRoom}/detail/${id}`)
   }
 
   return (
     <div className="py-4 px-6">
+      <Helmet>
+        <title>Quản lý phòng</title>
+        <meta name="description" content="Quản lý phòng" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <h1 className="text-base uppercase text-gray-600 font-semibold">Quản lý phòng</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
@@ -124,7 +132,7 @@ export default function ManageRoom() {
                   <td className="py-2 px-4 text-center text-sm">{item.acreage}</td>
                   <td className="py-2 px-4 text-center">
                     <div className="flex items-center justify-center gap-2 ">
-                      <button onClick={() => handleUpdateRoom(item.id as string)}>
+                      <button onClick={() => handleNavigateUpdate(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -140,7 +148,7 @@ export default function ManageRoom() {
                           />
                         </svg>
                       </button>
-                      <button onClick={() => handleDetailRoom(item.id as string)}>
+                      <button onClick={() => handleNavigateDetail(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

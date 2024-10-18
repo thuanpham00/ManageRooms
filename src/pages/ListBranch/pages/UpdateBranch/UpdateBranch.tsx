@@ -1,9 +1,19 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { useNavigate, useParams } from "react-router-dom"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useForm } from "react-hook-form"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { branchAPI } from "src/apis/branch.api"
+import { path } from "src/constants/path"
 import { TypeBranch } from "src/types/branches.type"
+import { toast } from "react-toastify"
+import { Helmet } from "react-helmet-async"
 
-export default function DetailBranch() {
+type FormData = TypeBranch
+
+export default function UpdateBranch() {
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+  const { state } = useLocation()
+
   const { nameId } = useParams()
 
   const getBranchDetailQuery = useQuery({
@@ -14,15 +24,45 @@ export default function DetailBranch() {
         controller.abort()
       }, 10000)
       return branchAPI.detailBranch(nameId as string)
-    },
-
-    retry: 1, // số lần fetch lại khi thất bại
-    placeholderData: keepPreviousData, // giữ data cũ
-    staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
+    }
   })
   const branchDetailData = getBranchDetailQuery.data?.data as TypeBranch
 
-  const navigate = useNavigate()
+  const updateBranchMutation = useMutation({
+    mutationFn: ({ id, body }: { id: string; body: TypeBranch }) => {
+      return branchAPI.updateBranch({ id, body }) // Gọi hàm updateBranch với đối tượng chứa id và body
+    }
+  })
+
+  const { handleSubmit, register } = useForm<FormData>()
+
+  const onSubmit = handleSubmit((data) => {
+    const body = {
+      name: data.name,
+      trademark: data.trademark,
+      description: data.description,
+      url: data.url,
+      province: data.province,
+      ward: data.ward,
+      location: data.location,
+      best_comforts: data.best_comforts,
+      images: branchDetailData.images // Giả sử bạn không muốn thay đổi hình ảnh
+    }
+
+    updateBranchMutation.mutate(
+      { id: nameId as string, body },
+      {
+        onSuccess: () => {
+          toast.success("Cập nhật chi nhánh thành công")
+          navigate(path.listBranch)
+          queryClient.invalidateQueries({ queryKey: ["branchList", state] })
+        },
+        onError: (error) => {
+          toast.error(error.message)
+        }
+      }
+    )
+  })
 
   const handleBack = () => {
     navigate(-1)
@@ -30,6 +70,11 @@ export default function DetailBranch() {
 
   return (
     <div className="py-4 px-6 relative">
+      <Helmet>
+        <title>Cập nhật chi nhánh</title>
+        <meta name="description" content="Quản lý chi nhánh" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <button onClick={handleBack} className="text-sm flex items-center hover:text-gray-400 duration-200">
           <svg
@@ -46,12 +91,14 @@ export default function DetailBranch() {
         </button>
         <h1 className="ml-1 text-base uppercase text-gray-600 font-semibold">Quản lý chi nhánh</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
-        <span className="text-sm text-[#3a86ff]">Thông tin chi nhánh</span>
+        <span className="text-sm text-[#3a86ff]">Cập nhật thông tin chi nhánh</span>
       </div>
-
       {!getBranchDetailQuery.isFetching && (
-        <form className="mt-2 p-4 bg-white rounded shadow-md overflow-y-scroll h-[550px]">
-          <h2 className="text-xl font-bold mb-4">Thông tin chi tiết</h2>
+        <form
+          onSubmit={onSubmit}
+          className="mt-2 p-4 bg-white rounded shadow-md lg:overflow-y-scroll h-auto lg:h-[550px]"
+        >
+          <h2 className="text-xl font-bold mb-4">Cập nhật thông tin</h2>
 
           <div>
             <div className="flex items-center gap-8">
@@ -60,7 +107,8 @@ export default function DetailBranch() {
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm outline-none"
+                  className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm"
+                  {...register("id")}
                   defaultValue={branchDetailData.id}
                   readOnly
                 />
@@ -71,9 +119,9 @@ export default function DetailBranch() {
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                   defaultValue={branchDetailData.name}
-                  readOnly
+                  {...register("name")}
                 />
               </div>
             </div>
@@ -83,9 +131,9 @@ export default function DetailBranch() {
               <input
                 type="text"
                 required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 defaultValue={branchDetailData.trademark}
-                readOnly
+                {...register("trademark")}
               />
             </div>
 
@@ -94,9 +142,9 @@ export default function DetailBranch() {
               <input
                 type="text"
                 required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 defaultValue={branchDetailData.description}
-                readOnly
+                {...register("description")}
               />
             </div>
 
@@ -105,9 +153,9 @@ export default function DetailBranch() {
               <input
                 type="text"
                 required
-                className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm outline-none"
+                className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm"
                 defaultValue={branchDetailData.url}
-                readOnly
+                {...register("url")}
               />
             </div>
 
@@ -117,9 +165,9 @@ export default function DetailBranch() {
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                   defaultValue={branchDetailData.province}
-                  readOnly
+                  {...register("province")}
                 />
               </div>
 
@@ -128,9 +176,9 @@ export default function DetailBranch() {
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                   defaultValue={branchDetailData.ward}
-                  readOnly
+                  {...register("ward")}
                 />
               </div>
             </div>
@@ -139,9 +187,9 @@ export default function DetailBranch() {
               <input
                 type="text"
                 required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 defaultValue={branchDetailData.location}
-                readOnly
+                {...register("location")}
               />
             </div>
 
@@ -150,9 +198,9 @@ export default function DetailBranch() {
               <input
                 type="text"
                 required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 defaultValue={branchDetailData.best_comforts}
-                readOnly
+                {...register("best_comforts")}
               />
             </div>
 
@@ -165,6 +213,21 @@ export default function DetailBranch() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="flex gap-2 justify-end">
+              <button
+                // onClick={handleClear}
+                className="mt-4 py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 duration-200 text-sm"
+              >
+                Xóa
+              </button>
+              <button
+                type="submit"
+                className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 duration-200 text-sm"
+              >
+                Cập nhật
+              </button>
             </div>
           </div>
         </form>

@@ -1,7 +1,8 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
+import { Helmet } from "react-helmet-async"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { roomAPI } from "src/apis/room.api"
 import { path } from "src/constants/path"
@@ -10,6 +11,10 @@ import { TypeRoom } from "src/types/branches.type"
 export type FormData = TypeRoom
 
 export default function CreateRoom() {
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+  const { state } = useLocation()
+
   const { handleSubmit, register, reset, setValue } = useForm<FormData>()
   const [images, setImages] = useState<string[]>([])
 
@@ -19,14 +24,13 @@ export default function CreateRoom() {
     }
   })
 
-  const navigate = useNavigate()
   const onSubmit = handleSubmit((data) => {
     console.log(data)
     createRoomMutation.mutate(data, {
       onSuccess: () => {
         toast.success("Tạo phòng thành công")
         navigate(path.listRoom)
-        window.location.reload()
+        queryClient.invalidateQueries({ queryKey: ["roomList", state] })
       },
       onError: (error) => {
         toast.error(error.message)
@@ -60,6 +64,11 @@ export default function CreateRoom() {
 
   return (
     <div className="py-4 px-6">
+      <Helmet>
+        <title>Thêm phòng</title>
+        <meta name="description" content="Quản lý phòng" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <button onClick={handleBack} className="text-sm flex items-center hover:text-gray-400 duration-200">
           <svg
@@ -79,32 +88,35 @@ export default function CreateRoom() {
         <span className="text-sm text-[#3a86ff]">Thêm phòng</span>
       </div>
 
-      <form onSubmit={onSubmit} className="mt-2 p-4 bg-white rounded shadow-md overflow-y-scroll h-[550px]">
+      <form
+        onSubmit={onSubmit}
+        className="mt-2 p-4 bg-white rounded shadow-md lg:overflow-y-scroll h-auto lg:h-[550px]"
+      >
         <h2 className="text-xl font-bold mb-4">Thêm Phòng</h2>
 
         <div>
-          <div className="flex items-center gap-8">
-            <div className="mb-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Mã phòng:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 {...register("id")}
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Mã chi nhánh:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 {...register("branch_id")}
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Tên phòng:</label>
               <input
                 type="text"
@@ -115,23 +127,23 @@ export default function CreateRoom() {
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="mb-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Giá mỗi đêm:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 {...register("price_per_night")}
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Giá mỗi tháng:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 {...register("price_per_month")}
               />
             </div>
@@ -147,8 +159,8 @@ export default function CreateRoom() {
             />
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="mb-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Loại giường:</label>
               <input
                 type="text"
@@ -157,7 +169,7 @@ export default function CreateRoom() {
                 {...register("bed_type")}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Danh sách tiện nghi:</label>
               <input
                 type="text"
@@ -166,7 +178,7 @@ export default function CreateRoom() {
                 {...register("comforts")}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Diện tích phòng:</label>
               <input
                 type="text"
@@ -177,29 +189,29 @@ export default function CreateRoom() {
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="mb-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Số lần đặt phòng:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 {...register("booking_turn")}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Số lượng phòng còn lại:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 {...register("stock")}
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="mb-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Thời gian có sẵn:</label>
               <input
                 type="text"
@@ -209,7 +221,7 @@ export default function CreateRoom() {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Thời gian không có sẵn:</label>
               <input
                 type="text"
@@ -220,8 +232,8 @@ export default function CreateRoom() {
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="mb-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Số người lớn tối đa:</label>
               <input
                 type="text"
@@ -231,7 +243,7 @@ export default function CreateRoom() {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Số trẻ em tối đa:</label>
               <input
                 type="text"
@@ -241,7 +253,7 @@ export default function CreateRoom() {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Số trẻ sơ sinh tối đa:</label>
               <input
                 type="text"

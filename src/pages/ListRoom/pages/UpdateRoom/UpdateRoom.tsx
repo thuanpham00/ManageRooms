@@ -1,17 +1,20 @@
-import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { path } from "src/constants/path"
 import { TypeRoom } from "src/types/branches.type"
 import { toast } from "react-toastify"
 import { roomAPI } from "src/apis/room.api"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
 
 type FormData = TypeRoom
 
 export default function UpdateRoom() {
-  const { nameId } = useParams()
-
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
+  const { state } = useLocation()
+
+  const { nameId } = useParams()
 
   const getRoomDetailQuery = useQuery({
     queryKey: ["branchDetail", nameId],
@@ -21,10 +24,7 @@ export default function UpdateRoom() {
         controller.abort()
       }, 10000)
       return roomAPI.detailRoom(nameId as string)
-    },
-    retry: 1, // số lần fetch lại khi thất bại
-    placeholderData: keepPreviousData, // giữ data cũ
-    staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
+    }
   })
   const roomDetailData = getRoomDetailQuery.data?.data as TypeRoom
 
@@ -62,7 +62,7 @@ export default function UpdateRoom() {
         onSuccess: () => {
           toast.success("Cập nhật chi nhánh thành công")
           navigate(path.listRoom)
-          window.location.reload() // Cập nhật lại trang
+          queryClient.invalidateQueries({ queryKey: ["roomList", state] })
         },
         onError: (error) => {
           toast.error(error.message)
@@ -77,6 +77,11 @@ export default function UpdateRoom() {
 
   return (
     <div className="py-4 px-6 relative">
+      <Helmet>
+        <title>Cập nhật phòng</title>
+        <meta name="description" content="Quản lý phòng" />
+      </Helmet>
+
       <div className="flex items-center gap-1">
         <button onClick={handleBack} className="text-sm flex items-center hover:text-gray-400 duration-200">
           <svg

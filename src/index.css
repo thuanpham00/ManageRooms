@@ -8,3 +8,9 @@ body {
   background-color: #f2f2f2;
   /* độ dày chữ : 400 mặc định */
 }
+
+@layer base {
+  :root {
+    --radius: 0.5rem
+  }
+}

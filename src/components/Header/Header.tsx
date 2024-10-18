@@ -1,29 +1,118 @@
-import { path } from "src/constants/path"
 import Popover from "../Popover"
 import { Link } from "react-router-dom"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
+import { path } from "src/constants/path"
+import logoSideBar from "src/img/SideBar/logo.jpg"
 
 export default function Header() {
   return (
-    <div className="w-full bg-white p-4 flex items-center justify-between">
-      <button>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
+    <div className="w-full bg-white p-4 flex items-center justify-between lg:justify-end">
+      <Sheet>
+        <SheetTrigger className="block lg:hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </SheetTrigger>
+        <SheetContent className="p-0">
+          <SheetHeader>
+            <SheetTitle className="mt-10">
+              <div className="flex justify-center">
+                <Link to={path.home} className="w-[200px] h-[80px]">
+                  <img src={logoSideBar} alt="logo sidebar" className="w-full h-full object-contain" />
+                </Link>
+              </div>
+            </SheetTitle>
+            <SheetDescription>
+              <div className="mt-4 py-4 px-6">
+                <span className="text-gray-400 text-sm py-2 uppercase">Quản lý</span>
+                <nav className="mt-2">
+                  <div>
+                    <Link
+                      to={path.listBranch}
+                      className="text-[#023047] text-sm py-2 flex items-center gap-2 hover:opacity-50 duration-150"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                        />
+                      </svg>
+                      Quản lý chi nhánh
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      to={path.listRoom}
+                      className="text-[#023047] text-sm py-2 flex items-center gap-2 hover:opacity-50 duration-150"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"
+                        />
+                      </svg>
+                      Quản lý phòng
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      to={path.listUser}
+                      className="text-[#023047] text-sm py-2 flex items-center gap-2 hover:opacity-50 duration-150"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                        />
+                      </svg>
+                      Quản lý người dùng
+                    </Link>
+                  </div>
+                </nav>
+              </div>
+            </SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
+
       <div>
         <Popover
           className="sticky top-0 left-0 z-30"
           renderPopover={
             <div className="shadow-lg flex flex-col">
               <Link
-                to={path.roomManage}
+                to="#"
                 className="text-sm text-left min-w-[120px] px-4 py-3 bg-[#edf2f4] text-textColor hover:bg-gray-300 duration-200 border border-gray-300"
               >
                 Thông tin tài khoản
