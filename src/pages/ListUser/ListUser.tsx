@@ -1,4 +1,4 @@
-import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { Link, useNavigate } from "react-router-dom"
@@ -10,7 +10,9 @@ import { TypeUser } from "src/types/branches.type"
 
 export default function ListUser() {
   const [currentPage, setCurrentPage] = useState(1)
-  const getUserList = useQuery({
+  const queryClient = useQueryClient()
+
+  const getUserListQuery = useQuery({
     queryKey: ["userList", currentPage],
     queryFn: () => {
       const controller = new AbortController()
@@ -24,7 +26,7 @@ export default function ListUser() {
     staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
   })
 
-  const listRoom = (getUserList.data?.data as TypeUser[]) || []
+  const listRoom = (getUserListQuery.data?.data as TypeUser[]) || []
 
   const totalItem = 5
   const startIndex = (currentPage - 1) * totalItem
@@ -53,7 +55,7 @@ export default function ListUser() {
     deleteUserMutation.mutate(id, {
       onSuccess: () => {
         toast.success("Xóa người dùng thành công")
-        location.reload()
+        queryClient.invalidateQueries({ queryKey: ["userList", currentPage] })
       }
     })
   }
@@ -114,23 +116,23 @@ export default function ListUser() {
             <div className="py-2 px-4 border-b text-sm text-center col-span-1">Thao tác</div>
           </div>
           <div className="w-full">
-            {!getUserList.isFetching &&
+            {!getUserListQuery.isFetching &&
               currentList.map((item) => (
-                <tr key={item.id} className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1">{item.id}</td>
-                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1 truncate">
+                <div key={item.id} className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                  <div className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1">{item.id}</div>
+                  <div className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1 truncate">
                     {item.fullname}
-                  </td>
-                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1 truncate">
+                  </div>
+                  <div className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1 truncate">
                     {item.email}
-                  </td>
-                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                  </div>
+                  <div className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
                     {item.nationality}
-                  </td>
-                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 md:block md:col-span-1">
+                  </div>
+                  <div className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 md:block md:col-span-1">
                     {item.roles}
-                  </td>
-                  <td className="py-2 px-4 text-center lg:col-span-1">
+                  </div>
+                  <div className="py-2 px-4 text-center lg:col-span-1">
                     <div className="flex items-center justify-center gap-2 ">
                       <button onClick={() => handleUpdateUser(item.id as string)}>
                         <svg
@@ -181,8 +183,8 @@ export default function ListUser() {
                         </svg>
                       </button>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                </div>
               ))}
           </div>
         </div>

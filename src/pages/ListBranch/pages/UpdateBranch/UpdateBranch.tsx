@@ -55,7 +55,7 @@ export default function UpdateBranch() {
         onSuccess: () => {
           toast.success("Cập nhật chi nhánh thành công")
           navigate(path.listBranch)
-          queryClient.invalidateQueries({ queryKey: ["branchList", state] })
+          queryClient.invalidateQueries({ queryKey: ["branchList", state] }) // chỉ trang tương ứng với currentPage (state) đó được làm mới.
         },
         onError: (error) => {
           toast.error(error.message)
@@ -214,12 +214,6 @@ export default function UpdateBranch() {
             </div>
 
             <div className="flex gap-2 justify-end">
-              <button
-                // onClick={handleClear}
-                className="mt-4 py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 duration-200 text-sm"
-              >
-                Xóa
-              </button>
               <button
                 type="submit"
                 className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 duration-200 text-sm"

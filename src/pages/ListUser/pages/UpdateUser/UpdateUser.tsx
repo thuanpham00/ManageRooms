@@ -208,12 +208,6 @@ export default function UpdateUser() {
 
             <div className="flex gap-2 justify-end">
               <button
-                // onClick={handleClear}
-                className="mt-4 py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 duration-200 text-sm"
-              >
-                Xóa
-              </button>
-              <button
                 type="submit"
                 className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 duration-200 text-sm"
               >

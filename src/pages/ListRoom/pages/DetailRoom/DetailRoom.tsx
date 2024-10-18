@@ -53,7 +53,7 @@ export default function DetailRoom() {
 
       {!getRoomDetailQuery.isFetching && (
         <form className="mt-2 p-4 bg-white rounded shadow-md">
-          <h2 className="text-xl font-bold mb-4">Thông tin chi tiết phòng</h2>
+          <h2 className="text-xl font-bold mb-4">Thông tin chi tiết</h2>
 
           <div>
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">

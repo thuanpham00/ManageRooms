@@ -1,77 +1,85 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { Helmet } from "react-helmet-async"
-import { useNavigate } from "react-router-dom"
-import { roomAPI } from "src/apis/room.api"
+import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { bookingAPI } from "src/apis/booking.api"
 import Pagination from "src/components/Pagination"
 import { path } from "src/constants/path"
-import { TypeRoom } from "src/types/branches.type"
+import { TypeBooking } from "src/types/branches.type"
 
-export default function ListRoom() {
+export default function ListBooking() {
   const [currentPage, setCurrentPage] = useState(1)
-  const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
-  const getBranchListQuery = useQuery({
-    queryKey: ["roomList", currentPage],
+  const getBookingListQuery = useQuery({
+    queryKey: ["bookingList", currentPage],
     queryFn: () => {
       const controller = new AbortController()
       setTimeout(() => {
         controller.abort()
       }, 10000)
-      return roomAPI.getRooms(controller.signal)
+      return bookingAPI.getBookings(controller.signal)
     },
     retry: 1, // số lần fetch lại khi thất bại
     placeholderData: keepPreviousData, // giữ data cũ
     staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
   })
 
-  const listRoom = (getBranchListQuery.data?.data as TypeRoom[]) || []
+  const listBooking = (getBookingListQuery.data?.data as TypeBooking[]) || []
 
   const totalItem = 5
   const startIndex = (currentPage - 1) * totalItem
   const endIndex = startIndex + totalItem
-  const currentList = listRoom.slice(startIndex, endIndex)
+  const currentList = listBooking.slice(startIndex, endIndex)
 
   const handleChangePage = (numberPage: number) => {
     setCurrentPage(numberPage)
   }
 
-  const handleNavigate = () => {
-    navigate(path.createRoom, {
+  const navigate = useNavigate()
+
+  const handleUpdateBooking = (id: string) => {
+    navigate(`${path.listBooking}/edit/${id}`, {
       state: currentPage
     })
   }
 
-  const handleNavigateUpdate = (id: string) => {
-    navigate(`${path.listRoom}/edit/${id}`, {
-      state: currentPage
-    })
-  }
+  const deleteUserMutation = useMutation({
+    mutationFn: (id: string) => {
+      return bookingAPI.deleteBooking(id)
+    }
+  })
 
-  const handleNavigateDetail = (id: string) => {
-    navigate(`${path.listRoom}/detail/${id}`)
+  const handleDeleteUser = (id: string) => {
+    deleteUserMutation.mutate(id, {
+      onSuccess: () => {
+        toast.success("Xóa booking thành công")
+        queryClient.invalidateQueries({ queryKey: ["bookingList", currentPage] })
+      }
+    })
   }
 
   return (
     <div className="py-4 px-6">
       <Helmet>
-        <title>Quản lý phòng</title>
-        <meta name="description" content="Quản lý phòng" />
+        <title>Quản lý người dùng</title>
+        <meta name="description" content="Quản lý người dùng" />
       </Helmet>
 
       <div className="flex items-center gap-1">
-        <h1 className="text-base uppercase text-gray-600 font-semibold">Quản lý phòng</h1>
+        <h1 className="text-base uppercase text-gray-600 font-semibold">Quản lý đặt phòng</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
-        <span className="text-sm text-[#3a86ff]">Danh sách phòng</span>
+        <span className="text-sm text-[#3a86ff]">Danh sách đặt phòng</span>
       </div>
 
       <div className="mt-4 p-4 bg-white">
-        <div className="flex items-center justify-between flex-col md:flex-row gap-2">
+        <div className="flex items-center justify-between">
           <form>
             <div className="flex items-center justify-center">
               <input
                 type="text"
-                placeholder="Nhập tên phòng hoặc mã phòng"
+                placeholder="Nhập mã đặt phòng"
                 className="w-[300px] outline-none p-2 border-2 border-[#3a86ff] border-r-0 rounded-tl-full rounded-bl-full text-sm"
               />
               <button className="bg-[#3a86ff] rounded-tr-full rounded-br-full py-2 px-3 border-2 border-[#3a86ff]">
@@ -92,60 +100,41 @@ export default function ListRoom() {
               </button>
             </div>
           </form>
-          <button
-            onClick={handleNavigate}
-            className="text-sm flex items-center gap-2 border border-gray-400 py-2 px-3 rounded-full bg-[#3a86ff] text-white hover:opacity-75 duration-200"
-          >
-            Thêm phòng
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-4 w-4"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
         </div>
 
         <div className="mt-4 w-full border border-gray-200 border-b-0">
           <div className="bg-[#e9ecef] grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-            <div className="py-2 px-4 text-sm text-center col-span-1">Mã phòng</div>
-            <div className="py-2 px-4 text-sm text-center col-span-1">Tên phòng</div>
-            <div className="py-2 px-4 text-sm text-center hidden col-span-0 md:block md:col-span-1">Loại giường</div>
-            <div className="py-2 px-4 text-sm text-center hidden col-span-0 lg:block lg:col-span-1">
-              Số lượng phòng trống
-            </div>
+            <div className="py-2 px-4 border-b text-sm text-center col-span-1">Mã đặt phòng</div>
+            <div className="py-2 px-4 border-b text-sm text-center col-span-1">Tên người đặt</div>
+            <div className="py-2 px-4 border-b text-sm text-center hidden col-span-0 lg:block lg:col-span-1">Email</div>
             <div className="py-2 px-4 border-b text-sm text-center hidden col-span-0 lg:block lg:col-span-1">
-              Diện tích
+              Loại phòng
+            </div>
+            <div className="py-2 px-4 border-b text-sm text-center hidden col-span-0 md:block md:col-span-1">
+              Mã số phòng
             </div>
             <div className="py-2 px-4 border-b text-sm text-center col-span-1">Thao tác</div>
           </div>
           <div className="w-full">
-            {!getBranchListQuery.isFetching &&
+            {!getBookingListQuery.isFetching &&
               currentList.map((item) => (
-                <div
-                  key={item.id}
-                  className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
-                >
-                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm col-span-1">{item.id}</div>
-                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm col-span-1 truncate">
-                    {item.name}
-                  </div>
-                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 md:block md:col-span-1">
-                    {item.bed_type}
-                  </div>
-                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
-                    {item.stock}
-                  </div>
-                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
-                    {item.acreage}
-                  </div>
-                  <div className="py-2 px-4 text-center col-span-1">
+                <div key={item.id} className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1">{item.id}</td>
+                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1 truncate">
+                    {item.fullname_order}
+                  </td>
+                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1 truncate">
+                    {item.email_order}
+                  </td>
+                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                    {item.type}
+                  </td>
+                  <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm hidden col-span-0 md:block md:col-span-1">
+                    {item.room_id}
+                  </td>
+                  <td className="py-2 px-4 text-center lg:col-span-1">
                     <div className="flex items-center justify-center gap-2 ">
-                      <button onClick={() => handleNavigateUpdate(item.id as string)}>
+                      <button onClick={() => handleUpdateBooking(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -161,7 +150,7 @@ export default function ListRoom() {
                           />
                         </svg>
                       </button>
-                      <button onClick={() => handleNavigateDetail(item.id as string)}>
+                      <Link to={`${path.listBooking}/detail/${item.id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -176,8 +165,8 @@ export default function ListRoom() {
                             d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
                           />
                         </svg>
-                      </button>
-                      <button>
+                      </Link>
+                      <button onClick={() => handleDeleteUser(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -194,7 +183,7 @@ export default function ListRoom() {
                         </svg>
                       </button>
                     </div>
-                  </div>
+                  </td>
                 </div>
               ))}
           </div>
@@ -202,7 +191,7 @@ export default function ListRoom() {
         <div className="my-4 flex justify-center">
           <Pagination
             totalOfPage={totalItem}
-            totalAllPage={listRoom.length}
+            totalAllPage={listBooking.length}
             currentPage={currentPage}
             onChangePage={handleChangePage}
           />

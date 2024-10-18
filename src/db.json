@@ -1,5 +1,5 @@
 {
-  "chi-nhanh": [
+  "branches": [
     {
       "name": "dataaaa",
       "trademark": "gate_boutique_da_latss",
@@ -208,7 +208,7 @@
       ]
     }
   ],
-  "phong": [
+  "rooms": [
     {
       "branch_id": "1",
       "price_per_night": "1400000",
@@ -407,6 +407,26 @@
       "books": "3",
       "update_at": "Fri Oct 18 2024 12:50:42 GMT+0700 (Indochina Time)",
       "roles": "admin",
+      "id": "1"
+    }
+  ],
+  "bookings": [
+    {
+      "adults": "1",
+      "children": "1",
+      "babies": "0",
+      "checkin": "2024-11-01",
+      "checkout": "2024-11-05",
+      "fullname_order": "Nguyen Van Agrgr",
+      "email_order": "nguyenvana@example.com",
+      "phone_order": "+84901234567",
+      "fullname_customer": "Tran Thi B",
+      "email_customer": "tranthib@example.com",
+      "phone_customer": "+84987654321",
+      "type": "Deluxecc",
+      "range": "Months",
+      "room_id": "1",
+      "note": "1vdvdvdvdsdsdsdsds",
       "id": "1"
     }
   ]

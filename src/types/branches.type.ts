@@ -44,3 +44,34 @@ export type TypeUser = {
   update_at: string
   roles: string[]
 }
+
+export type TypeBooking = {
+  id?: string
+  adults: number
+  children: number
+  babies: number
+  checkin: string
+  checkout: string
+  fullname_order: string
+  email_order: string
+  phone_order: string
+  fullname_customer: string
+  email_customer: string
+  phone_customer: string
+  type: string
+  range: string
+  room_id: string
+  note: string
+}
+
+export enum BookingStatus {
+  paid,
+  pending,
+  done,
+  cancelled
+}
+
+export enum BookingRange {
+  nights,
+  months
+}

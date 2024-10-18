@@ -3,6 +3,9 @@ import { lazy, Suspense } from "react"
 import { useRoutes } from "react-router-dom"
 import MainLayout from "src/layouts/MainLayout"
 import MainLayout2 from "src/layouts/MainLayout2"
+import ListBooking from "src/pages/ListBooking"
+import UpdateBooking from "src/pages/ListBooking/pages/UpdateBooking"
+import DetailBooking from "src/pages/ListBooking/pages/DetailBooking"
 
 const ListBranch = lazy(() => import("../pages/ListBranch"))
 const CreateBranch = lazy(() => import("../pages/ListBranch/pages/CreateBranch"))
@@ -39,7 +42,6 @@ export default function AppRouter() {
             },
             {
               path: path.listBranch,
-              index: true,
               element: (
                 <Suspense>
                   <ListBranch />
@@ -124,6 +126,30 @@ export default function AppRouter() {
               element: (
                 <Suspense>
                   <DetailUser />
+                </Suspense>
+              )
+            },
+            {
+              path: path.listBooking,
+              element: (
+                <Suspense>
+                  <ListBooking />
+                </Suspense>
+              )
+            },
+            {
+              path: path.updateBooking,
+              element: (
+                <Suspense>
+                  <UpdateBooking />
+                </Suspense>
+              )
+            },
+            {
+              path: path.detailBooking,
+              element: (
+                <Suspense>
+                  <DetailBooking />
                 </Suspense>
               )
             }

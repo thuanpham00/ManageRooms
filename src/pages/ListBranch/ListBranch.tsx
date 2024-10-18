@@ -38,13 +38,13 @@ export default function ListBranch() {
 
   const handleNavigate = () => {
     navigate(path.createBranch, {
-      state: currentPage
+      state: currentPage // để invalidateQuery
     })
   }
 
   const handleNavigateUpdate = (id: string) => {
     navigate(`${path.listBranch}/edit/${id}`, {
-      state: currentPage
+      state: currentPage // để invalidateQuery
     })
   }
 

@@ -1,9 +1,9 @@
 export const path = {
   home: "/",
-  listBranch: "/branchs",
-  createBranch: "/branchs/create",
-  updateBranch: "/branchs/edit/:nameId",
-  detailBranch: "/branchs/detail/:nameId",
+  listBranch: "/branches",
+  createBranch: "/branches/create",
+  updateBranch: "/branches/edit/:nameId",
+  detailBranch: "/branches/detail/:nameId",
 
   listRoom: "/rooms",
   createRoom: "/rooms/create",
@@ -12,5 +12,9 @@ export const path = {
 
   listUser: "/users",
   updateUser: "/users/edit/:nameId",
-  detailUser: "/users/detail/:nameId"
+  detailUser: "/users/detail/:nameId",
+
+  listBooking: "/bookings",
+  updateBooking: "/bookings/edit/:nameId",
+  detailBooking: "/bookings/detail/:nameId"
 } as const
