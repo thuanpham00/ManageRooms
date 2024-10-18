@@ -46,29 +46,29 @@ export default function DetailUser() {
           </svg>
           Trở lại
         </button>
-        <h1 className="ml-1 text-base uppercase text-gray-600 font-semibold">Quản lý người dùng</h1>
+        <h1 className="ml-1 text-base uppercase text-gray-600 font-semibold hidden md:block">Quản lý người dùng</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
         <span className="text-sm text-[#3a86ff]">Thông tin người dùng</span>
       </div>
 
       {!getUserDetailQuery.isFetching && (
-        <form className="mt-2 p-4 bg-white rounded shadow-md overflow-y-scroll h-[550px]">
+        <form className="mt-2 p-4 bg-white rounded shadow-md">
           <h2 className="text-xl font-bold mb-4">Thông tin chi tiết</h2>
 
           <div>
-            <div className="flex items-center gap-8">
-              <div className="mb-4">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+              <div className="mb-4 w-full md:w-[200px]">
                 <label className="block text-sm font-medium text-gray-700">Mã người dùng:</label>
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm outline-none"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
                   defaultValue={userDetailData.id}
                   readOnly
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-4 w-full md:w-[200px]">
                 <label className="block text-sm font-medium text-gray-700">Tên người dùng:</label>
                 <input
                   type="text"
@@ -102,19 +102,19 @@ export default function DetailUser() {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Quốc tịch:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm outline-none"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
                 defaultValue={userDetailData.nationality}
                 readOnly
               />
             </div>
 
-            <div className="flex items-center gap-8">
-              <div className="mb-4">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+              <div className="mb-4 w-full md:w-[250px]">
                 <label className="block text-sm font-medium text-gray-700">Thời gian đặt phòng gần nhất:</label>
                 <input
                   type="text"
@@ -125,7 +125,7 @@ export default function DetailUser() {
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-4 w-full md:w-[200px]">
                 <label className="block text-sm font-medium text-gray-700">Số đêm đã đặt:</label>
                 <input
                   type="text"
@@ -136,26 +136,28 @@ export default function DetailUser() {
                 />
               </div>
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Số lần đặt phòng:</label>
-              <input
-                type="text"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                defaultValue={userDetailData.books}
-                readOnly
-              />
-            </div>
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+              <div className="mb-4 w-full md:w-[200px]">
+                <label className="block text-sm font-medium text-gray-700">Số lần đặt phòng:</label>
+                <input
+                  type="text"
+                  required
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                  defaultValue={userDetailData.books}
+                  readOnly
+                />
+              </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Vai trò:</label>
-              <input
-                type="text"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                defaultValue={userDetailData.roles}
-                readOnly
-              />
+              <div className="mb-4 w-full md:w-[200px]">
+                <label className="block text-sm font-medium text-gray-700">Vai trò:</label>
+                <input
+                  type="text"
+                  required
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                  defaultValue={userDetailData.roles}
+                  readOnly
+                />
+              </div>
             </div>
           </div>
         </form>

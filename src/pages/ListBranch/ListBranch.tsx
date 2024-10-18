@@ -72,9 +72,9 @@ export default function ListBranch() {
               <input
                 type="text"
                 placeholder="Nhập tên chi nhánh hoặc mã chi nhánh"
-                className="w-[300px] outline-none p-2 border-2 border-[#1982c4] border-r-0 rounded-tl-full rounded-bl-full text-sm"
+                className="w-[300px] outline-none p-2 border-2 border-[#3a86ff] border-r-0 rounded-tl-full rounded-bl-full text-sm"
               />
-              <button className="bg-[#1982c4] rounded-tr-full rounded-br-full py-2 px-3 border-2 border-[#1982c4]">
+              <button className="bg-[#3a86ff] rounded-tr-full rounded-br-full py-2 px-3 border-2 border-[#3a86ff]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -94,7 +94,7 @@ export default function ListBranch() {
           </form>
           <button
             onClick={handleNavigate}
-            className="text-sm flex items-center gap-2 border border-gray-400 py-2 px-3 rounded-full bg-[#4361ee] text-white hover:opacity-75 duration-200"
+            className="text-sm flex items-center gap-2 border border-gray-400 py-2 px-3 rounded-full bg-[#3a86ff] text-white hover:opacity-75 duration-200"
           >
             Thêm chi nhánh
             <svg
@@ -109,42 +109,41 @@ export default function ListBranch() {
             </svg>
           </button>
         </div>
-        <div className="mt-4 w-full bg-white border border-gray-200 rounded-lg">
+
+        <div className="mt-4 w-full border border-gray-200 border-b-0">
           <div className="bg-[#e9ecef] grid grid-cols-6">
-            <div className="py-2 px-4 border-b text-sm col-span-2 md:col-span-1 lg:col-span-1 text-center">
-              Mã chi nhánh
-            </div>
-            <div className="py-2 px-4 border-b text-sm col-span-2 md:col-span-2 lg:col-span-1 text-center">
-              Tên chi nhánh
-            </div>
-            <div className="py-2 px-4 border-b text-sm hidden col-span-0 md:block md:col-span-2 lg:col-span-1 text-center">
+            <div className="py-2 px-4 text-sm col-span-2 md:col-span-1 lg:col-span-1 text-center">Mã chi nhánh</div>
+            <div className="py-2 px-4 text-sm col-span-2 md:col-span-2 lg:col-span-1 text-center">Tên chi nhánh</div>
+            <div className="py-2 px-4 text-sm hidden col-span-0 md:block md:col-span-2 lg:col-span-1 text-center">
               Thương hiệu
             </div>
-            <div className="py-2 px-4 border-b text-sm hidden col-span-0 lg:block lg:col-span-1 col-span-1 text-center">
+            <div className="py-2 px-4 text-sm hidden col-span-0 lg:block lg:col-span-1 col-span-1 text-center">
               Tỉnh/thành phố
             </div>
-            <div className="py-2 px-4 border-b text-sm hidden col-span-0 lg:block lg:col-span-1 text-center">
-              Phường/quận
-            </div>
-            <div className="py-2 px-4 border-b text-sm col-span-2 md:col-span-1 text-center">Thao tác</div>
+            <div className="py-2 px-4 text-sm hidden col-span-0 lg:block lg:col-span-1 text-center">Phường/quận</div>
+            <div className="py-2 px-4 text-sm col-span-2 md:col-span-1 text-center">Thao tác</div>
           </div>
           <div className="w-full">
             {!getBranchListQuery.isFetching &&
               currentList.map((item) => (
-                <tr key={item.id} className="border-b grid grid-cols-6">
-                  <td className="py-2 px-4 text-center text-sm col-span-2 md:col-span-1 lg:col-span-1">{item.id}</td>
-                  <td className="py-2 px-4 text-center text-sm col-span-2 md:col-span-2 lg:col-span-1">{item.name}</td>
-                  <td className="py-2 px-4 text-center text-sm hidden col-span-0 md:block md:col-span-2 lg:col-span-1">
+                <div key={item.id} className="border-b border-b-gray-300 grid grid-cols-6">
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm col-span-2 md:col-span-1 lg:col-span-1">
+                    {item.id}
+                  </div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm col-span-2 md:col-span-2 lg:col-span-1 truncate">
+                    {item.name}
+                  </div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 md:block md:col-span-2 lg:col-span-1 truncate">
                     {item.trademark}
-                  </td>
-                  <td className="py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                  </div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
                     {item.province}
-                  </td>
-                  <td className="py-2 px-4 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                  </div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
                     {item.ward}
-                  </td>
+                  </div>
 
-                  <td className="py-2 px-4 text-center col-span-2 md:col-span-1">
+                  <div className="py-2 px-4 text-center col-span-2 md:col-span-1">
                     <div className="flex items-center justify-center gap-2 ">
                       <button onClick={() => handleNavigateUpdate(item.id as string)}>
                         <svg
@@ -195,8 +194,8 @@ export default function ListBranch() {
                         </svg>
                       </button>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                </div>
               ))}
           </div>
         </div>

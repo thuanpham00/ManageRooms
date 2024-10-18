@@ -4,7 +4,7 @@ import logoSideBar from "src/img/SideBar/logo.jpg"
 
 export default function SidebarMenu() {
   return (
-    <div className="bg-[#fff] w-full py-4 px-6 h-screen border border-gray-300 shadow-md">
+    <div className="bg-[#fff] w-full py-4 px-6 sticky left-0 top-0 h-screen border border-gray-300 shadow-md">
       <div className="flex justify-center">
         <Link to={path.home} className="w-[200px] h-[80px]">
           <img src={logoSideBar} alt="logo sidebar" className="w-full h-full object-contain" />

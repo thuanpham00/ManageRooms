@@ -89,32 +89,30 @@ export default function UpdateBranch() {
           </svg>
           Trở lại
         </button>
-        <h1 className="ml-1 text-base uppercase text-gray-600 font-semibold">Quản lý chi nhánh</h1>
+        <h1 className="ml-1 text-base uppercase text-gray-600 font-semibold hidden md:block">Quản lý chi nhánh</h1>
         <span className="text-sm text-[#6c757d]"> / </span>
         <span className="text-sm text-[#3a86ff]">Cập nhật thông tin chi nhánh</span>
       </div>
+
       {!getBranchDetailQuery.isFetching && (
-        <form
-          onSubmit={onSubmit}
-          className="mt-2 p-4 bg-white rounded shadow-md lg:overflow-y-scroll h-auto lg:h-[550px]"
-        >
+        <form onSubmit={onSubmit} className="mt-2 p-4 bg-white rounded shadow-md">
           <h2 className="text-xl font-bold mb-4">Cập nhật thông tin</h2>
 
           <div>
-            <div className="flex items-center gap-8">
-              <div className="mb-4">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+              <div className="mb-4 w-full md:w-[200px]">
                 <label className="block text-sm font-medium text-gray-700">Mã chi nhánh:</label>
                 <input
                   type="text"
                   required
-                  className="mt-1 block w-[200px] p-2 border border-gray-300 rounded text-sm"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
                   {...register("id")}
                   defaultValue={branchDetailData.id}
                   readOnly
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-4 w-full md:w-[200px]">
                 <label className="block text-sm font-medium text-gray-700">Tên Chi Nhánh:</label>
                 <input
                   type="text"
@@ -126,7 +124,7 @@ export default function UpdateBranch() {
               </div>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Thương Hiệu:</label>
               <input
                 type="text"
@@ -139,28 +137,28 @@ export default function UpdateBranch() {
 
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">Mô tả:</label>
-              <input
-                type="text"
+              <textarea
                 required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm resize-none"
                 defaultValue={branchDetailData.description}
+                rows={10} // Bạn có thể thay đổi số dòng theo ý muốn
                 {...register("description")}
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full md:w-[300px]">
               <label className="block text-sm font-medium text-gray-700">URL:</label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
                 defaultValue={branchDetailData.url}
                 {...register("url")}
               />
             </div>
 
-            <div className="flex items-center gap-8">
-              <div className="mb-4">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+              <div className="mb-4 w-full md:w-[200px]">
                 <label className="block text-sm font-medium text-gray-700">Tỉnh:</label>
                 <input
                   type="text"
@@ -171,7 +169,7 @@ export default function UpdateBranch() {
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-4 w-full md:w-[200px]">
                 <label className="block text-sm font-medium text-gray-700">Phường:</label>
                 <input
                   type="text"

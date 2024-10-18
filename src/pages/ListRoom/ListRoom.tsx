@@ -66,15 +66,15 @@ export default function ListRoom() {
       </div>
 
       <div className="mt-4 p-4 bg-white">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-col md:flex-row gap-2">
           <form>
             <div className="flex items-center justify-center">
               <input
                 type="text"
                 placeholder="Nhập tên phòng hoặc mã phòng"
-                className="w-[300px] outline-none p-2 border-2 border-[#1982c4] border-r-0 rounded-tl-full rounded-bl-full text-sm"
+                className="w-[300px] outline-none p-2 border-2 border-[#3a86ff] border-r-0 rounded-tl-full rounded-bl-full text-sm"
               />
-              <button className="bg-[#1982c4] rounded-tr-full rounded-br-full py-2 px-3 border-2 border-[#1982c4]">
+              <button className="bg-[#3a86ff] rounded-tr-full rounded-br-full py-2 px-3 border-2 border-[#3a86ff]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -94,7 +94,7 @@ export default function ListRoom() {
           </form>
           <button
             onClick={handleNavigate}
-            className="text-sm flex items-center gap-2 border border-gray-400 py-2 px-3 rounded-full bg-[#4361ee] text-white hover:opacity-75 duration-200"
+            className="text-sm flex items-center gap-2 border border-gray-400 py-2 px-3 rounded-full bg-[#3a86ff] text-white hover:opacity-75 duration-200"
           >
             Thêm phòng
             <svg
@@ -110,27 +110,40 @@ export default function ListRoom() {
           </button>
         </div>
 
-        <table className="mt-4 w-full bg-white border border-gray-200 rounded-lg">
-          <thead>
-            <tr className="bg-[#e9ecef]">
-              <th className="py-2 px-4 border-b text-sm">Mã phòng</th>
-              <th className="py-2 px-4 border-b text-sm">Tên phòng</th>
-              <th className="py-2 px-4 border-b text-sm">Loại giường</th>
-              <th className="py-2 px-4 border-b text-sm">Số lượng phòng trống</th>
-              <th className="py-2 px-4 border-b text-sm">Diện tích</th>
-              <th className="py-2 px-4 border-b text-sm">Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className="mt-4 w-full border border-gray-200 border-b-0">
+          <div className="bg-[#e9ecef] grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            <div className="py-2 px-4 text-sm text-center col-span-1">Mã phòng</div>
+            <div className="py-2 px-4 text-sm text-center col-span-1">Tên phòng</div>
+            <div className="py-2 px-4 text-sm text-center hidden col-span-0 md:block md:col-span-1">Loại giường</div>
+            <div className="py-2 px-4 text-sm text-center hidden col-span-0 lg:block lg:col-span-1">
+              Số lượng phòng trống
+            </div>
+            <div className="py-2 px-4 border-b text-sm text-center hidden col-span-0 lg:block lg:col-span-1">
+              Diện tích
+            </div>
+            <div className="py-2 px-4 border-b text-sm text-center col-span-1">Thao tác</div>
+          </div>
+          <div className="w-full">
             {!getBranchList.isFetching &&
               currentList.map((item) => (
-                <tr key={item.id} className="border-b">
-                  <td className="py-2 px-4 text-center text-sm">{item.id}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.name}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.bed_type}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.stock}</td>
-                  <td className="py-2 px-4 text-center text-sm">{item.acreage}</td>
-                  <td className="py-2 px-4 text-center">
+                <div
+                  key={item.id}
+                  className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+                >
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm col-span-1">{item.id}</div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm col-span-1 truncate">
+                    {item.name}
+                  </div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 md:block md:col-span-1">
+                    {item.bed_type}
+                  </div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                    {item.stock}
+                  </div>
+                  <div className="py-2 px-4 border-r border-r-gray-300 text-center text-sm hidden col-span-0 lg:block lg:col-span-1">
+                    {item.acreage}
+                  </div>
+                  <div className="py-2 px-4 text-center col-span-1">
                     <div className="flex items-center justify-center gap-2 ">
                       <button onClick={() => handleNavigateUpdate(item.id as string)}>
                         <svg
@@ -181,11 +194,11 @@ export default function ListRoom() {
                         </svg>
                       </button>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                </div>
               ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
         <div className="my-4 flex justify-center">
           <Pagination
             totalOfPage={totalItem}
