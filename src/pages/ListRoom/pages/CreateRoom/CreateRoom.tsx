@@ -87,10 +87,7 @@ export default function CreateRoom() {
         <span className="text-sm text-[#3a86ff]">Thêm phòng</span>
       </div>
 
-      <form
-        onSubmit={onSubmit}
-        className="mt-2 p-4 bg-white rounded shadow-md"
-      >
+      <form onSubmit={onSubmit} className="mt-2 p-4 bg-white rounded shadow-md">
         <h2 className="text-xl font-bold mb-4">Thêm Phòng</h2>
 
         <div>
@@ -149,10 +146,10 @@ export default function CreateRoom() {
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Mô tả:</label>
-            <input
-              type="text"
+            <textarea
               required
               className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+              rows={10}
               {...register("description")}
             />
           </div>

@@ -125,10 +125,10 @@ export default function CreateBranch() {
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Mô tả:</label>
-            <input
-              type="text"
+            <textarea
               required
               className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+              rows={10} // Cố định 10 dòng
               {...register("description")}
             />
           </div>

@@ -50,6 +50,7 @@ export default function DetailBranch() {
         <span className="text-sm text-[#6c757d]"> / </span>
         <span className="text-sm text-[#3a86ff]">Thông tin chi nhánh</span>
       </div>
+
       {!getBranchDetailQuery.isFetching && (
         <form className="mt-2 p-4 bg-white rounded shadow-md">
           <h2 className="text-xl font-bold mb-4">Thông tin chi tiết</h2>

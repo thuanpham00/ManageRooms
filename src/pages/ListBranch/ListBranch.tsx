@@ -199,6 +199,7 @@ export default function ListBranch() {
               ))}
           </div>
         </div>
+
         <div className="my-4 flex justify-center">
           <Pagination
             totalOfPage={totalItem}
