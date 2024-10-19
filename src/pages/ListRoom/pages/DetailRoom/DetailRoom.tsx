@@ -98,7 +98,7 @@ export default function DetailRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.price_per_night}
+                  defaultValue={roomDetailData.price_per_night as number}
                   readOnly
                 />
               </div>
@@ -109,7 +109,7 @@ export default function DetailRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.price_per_month}
+                  defaultValue={roomDetailData.price_per_month as number}
                   readOnly
                 />
               </div>
@@ -149,7 +149,7 @@ export default function DetailRoom() {
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.acreage}
+                  defaultValue={roomDetailData.acreage as number}
                   readOnly
                 />
               </div>
@@ -161,7 +161,7 @@ export default function DetailRoom() {
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.booking_turn}
+                  defaultValue={roomDetailData.booking_turn as number}
                   readOnly
                 />
               </div>
@@ -170,7 +170,7 @@ export default function DetailRoom() {
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.stock}
+                  defaultValue={roomDetailData.stock as number}
                   readOnly
                 />
               </div>
@@ -204,7 +204,7 @@ export default function DetailRoom() {
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.max_adults}
+                  defaultValue={roomDetailData.max_adults as number}
                   readOnly
                 />
               </div>
@@ -214,7 +214,7 @@ export default function DetailRoom() {
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.max_children}
+                  defaultValue={roomDetailData.max_children as number}
                   readOnly
                 />
               </div>
@@ -224,7 +224,7 @@ export default function DetailRoom() {
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={roomDetailData.max_babies}
+                  defaultValue={roomDetailData.max_babies as number}
                   readOnly
                 />
               </div>

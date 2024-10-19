@@ -131,7 +131,7 @@ export default function DetailUser() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={userDetailData.nights}
+                  defaultValue={userDetailData.nights as number}
                   readOnly
                 />
               </div>
@@ -143,7 +143,7 @@ export default function DetailUser() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  defaultValue={userDetailData.books}
+                  defaultValue={userDetailData.books as number}
                   readOnly
                 />
               </div>

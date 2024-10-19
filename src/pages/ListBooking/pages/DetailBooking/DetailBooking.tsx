@@ -1,9 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { Helmet } from "react-helmet-async"
 import { useNavigate, useParams } from "react-router-dom"
-
 import { bookingAPI } from "src/apis/booking.api"
-
 import { TypeBooking } from "src/types/branches.type"
 
 export default function UpdateBooking() {
@@ -189,7 +187,7 @@ export default function UpdateBooking() {
                   <input
                     type="text"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                    defaultValue={bookingDetailData.adults}
+                    defaultValue={bookingDetailData.adults as number}
                     readOnly
                   />
                 </div>
@@ -199,7 +197,7 @@ export default function UpdateBooking() {
                   <input
                     type="text"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                    defaultValue={bookingDetailData.children}
+                    defaultValue={bookingDetailData.children as number}
                     readOnly
                   />
                 </div>
@@ -209,7 +207,7 @@ export default function UpdateBooking() {
                   <input
                     type="text"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                    defaultValue={bookingDetailData.babies}
+                    defaultValue={bookingDetailData.babies as number}
                     readOnly
                   />
                 </div>
