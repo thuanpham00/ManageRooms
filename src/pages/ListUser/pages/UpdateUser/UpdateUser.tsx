@@ -34,7 +34,7 @@ export default function UpdateUser() {
     }
   })
 
-  const { handleSubmit, register } = useForm<FormData>()
+  const { handleSubmit, register, reset } = useForm<FormData>()
 
   const onSubmit = handleSubmit((data) => {
     const body = {
@@ -67,6 +67,21 @@ export default function UpdateUser() {
 
   const handleBack = () => {
     navigate(-1)
+  }
+
+  const handleClear = () => {
+    reset({
+      email: "",
+      phone: "",
+      fullname: "",
+      nationality: "",
+      last_booking: "",
+      nights: null,
+      books: null,
+      create_at: "",
+      update_at: "",
+      roles: []
+    })
   }
 
   return (
@@ -176,7 +191,7 @@ export default function UpdateUser() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={userDetailData.nights}
+                  defaultValue={userDetailData.nights as number}
                   {...register("nights")}
                 />
               </div>
@@ -189,7 +204,7 @@ export default function UpdateUser() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={userDetailData.books}
+                  defaultValue={userDetailData.books as number}
                   {...register("books")}
                 />
               </div>
@@ -207,6 +222,13 @@ export default function UpdateUser() {
             </div>
 
             <div className="flex gap-2 justify-end">
+              <button
+                onClick={handleClear}
+                type="button"
+                className="mt-4 py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 duration-200 text-sm"
+              >
+                Xóa
+              </button>
               <button
                 type="submit"
                 className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 duration-200 text-sm"

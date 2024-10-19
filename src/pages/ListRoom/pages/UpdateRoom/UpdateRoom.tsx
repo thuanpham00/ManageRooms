@@ -34,7 +34,7 @@ export default function UpdateRoom() {
     }
   })
 
-  const { handleSubmit, register } = useForm<FormData>()
+  const { handleSubmit, register, reset } = useForm<FormData>()
 
   const onSubmit = handleSubmit((data) => {
     const body = {
@@ -73,6 +73,26 @@ export default function UpdateRoom() {
 
   const handleBack = () => {
     navigate(-1)
+  }
+
+  const handleClear = () => {
+    reset({
+      branch_id: "", // ID của chi nhánh mà phòng thuộc về
+      price_per_night: null, // Giá mỗi đêm
+      price_per_month: null, // Giá mỗi tháng
+      name: "", // Tên phòng
+      description: [], // Mô tả phòng (mảng các chuỗi)
+      comforts: [], // Danh sách các tiện nghi (mảng các chuỗi)
+      bed_type: "", // Loại giường
+      booking_turn: null, // Số lần đặt phòng
+      stock: null, // Số lượng phòng còn lại
+      acreage: null, // Diện tích phòng (m2)
+      available_from: "", // Thời gian có sẵn (ISO 8601)
+      available_to: "", // Thời gian không còn sẵn (ISO 8601)
+      max_adults: null, // Số người lớn tối đa
+      max_children: null, // Số trẻ em tối đa
+      max_babies: null // Số trẻ sơ sinh tối đa
+    })
   }
 
   return (
@@ -149,7 +169,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.price_per_night}
+                  defaultValue={roomDetailData.price_per_night as number}
                   {...register("price_per_night")}
                 />
               </div>
@@ -160,7 +180,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.price_per_month}
+                  defaultValue={roomDetailData.price_per_month as number}
                   {...register("price_per_month")}
                 />
               </div>
@@ -204,7 +224,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.acreage}
+                  defaultValue={roomDetailData.acreage as number}
                   {...register("acreage")}
                 />
               </div>
@@ -217,7 +237,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.booking_turn}
+                  defaultValue={roomDetailData.booking_turn as number}
                   {...register("booking_turn")}
                 />
               </div>
@@ -227,7 +247,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.stock}
+                  defaultValue={roomDetailData.stock as number}
                   {...register("stock")}
                 />
               </div>
@@ -264,7 +284,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.max_adults}
+                  defaultValue={roomDetailData.max_adults as number}
                   {...register("max_adults")}
                 />
               </div>
@@ -275,7 +295,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.max_children}
+                  defaultValue={roomDetailData.max_children as number}
                   {...register("max_children")}
                 />
               </div>
@@ -286,7 +306,7 @@ export default function UpdateRoom() {
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={roomDetailData.max_babies}
+                  defaultValue={roomDetailData.max_babies as number}
                   {...register("max_babies")}
                 />
               </div>
@@ -304,6 +324,13 @@ export default function UpdateRoom() {
             </div>
 
             <div className="flex gap-2 justify-end">
+              <button
+                onClick={handleClear}
+                type="button"
+                className="mt-4 py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 duration-200 text-sm"
+              >
+                Xóa
+              </button>
               <button
                 type="submit"
                 className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 duration-200 text-sm"

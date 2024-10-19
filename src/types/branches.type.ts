@@ -14,20 +14,20 @@ export type TypeBranch = {
 export type TypeRoom = {
   id?: string // ID của phòng
   branch_id: string // ID của chi nhánh mà phòng thuộc về
-  price_per_night: number // Giá mỗi đêm
-  price_per_month: number // Giá mỗi tháng
+  price_per_night: number | null // Giá mỗi đêm
+  price_per_month: number | null // Giá mỗi tháng
   name: string // Tên phòng
   description: string[] // Mô tả phòng (mảng các chuỗi)
   comforts: string[] // Danh sách các tiện nghi (mảng các chuỗi)
   bed_type: string // Loại giường
-  booking_turn: number // Số lần đặt phòng
-  stock: number // Số lượng phòng còn lại
-  acreage: number // Diện tích phòng (m2)
+  booking_turn: number | null // Số lần đặt phòng
+  stock: number | null // Số lượng phòng còn lại
+  acreage: number | null // Diện tích phòng (m2)
   available_from: string // Thời gian có sẵn (ISO 8601)
   available_to: string // Thời gian không còn sẵn (ISO 8601)
-  max_adults: number // Số người lớn tối đa
-  max_children: number // Số trẻ em tối đa
-  max_babies: number // Số trẻ sơ sinh tối đa
+  max_adults: number | null // Số người lớn tối đa
+  max_children: number | null // Số trẻ em tối đa
+  max_babies: number | null // Số trẻ sơ sinh tối đa
   images: string[] // Danh sách đường dẫn hình ảnh (mảng các chuỗi)
 }
 
@@ -38,8 +38,8 @@ export type TypeUser = {
   fullname: string
   nationality: string
   last_booking: string
-  nights: number
-  books: number
+  nights: number | null
+  books: number | null
   create_at: string
   update_at: string
   roles: string[]
@@ -47,9 +47,9 @@ export type TypeUser = {
 
 export type TypeBooking = {
   id?: string
-  adults: number
-  children: number
-  babies: number
+  adults: number | null
+  children: number | null
+  babies: number | null
   checkin: string
   checkout: string
   fullname_order: string

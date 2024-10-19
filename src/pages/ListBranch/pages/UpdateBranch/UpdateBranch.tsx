@@ -34,7 +34,7 @@ export default function UpdateBranch() {
     }
   })
 
-  const { handleSubmit, register } = useForm<FormData>()
+  const { handleSubmit, register, reset } = useForm<FormData>()
 
   const onSubmit = handleSubmit((data) => {
     const body = {
@@ -68,6 +68,19 @@ export default function UpdateBranch() {
     navigate(-1)
   }
 
+  const handleClear = () => {
+    reset({
+      name: "",
+      trademark: "",
+      url: "",
+      province: "",
+      ward: "",
+      location: "",
+      best_comforts: [],
+      description: [],
+    })
+  }
+
   return (
     <div className="py-4 px-6 relative">
       <Helmet>
@@ -94,136 +107,145 @@ export default function UpdateBranch() {
         <span className="text-sm text-[#3a86ff]">Cập nhật thông tin chi nhánh</span>
       </div>
 
-      {!getBranchDetailQuery.isFetching && (
-        <form onSubmit={onSubmit} className="mt-2 p-4 bg-white rounded shadow-md">
-          <h2 className="text-xl font-bold mb-4">Cập nhật thông tin</h2>
+      <div className="mt-2 p-4 bg-white rounded shadow-md relative">
+        {!getBranchDetailQuery.isFetching && (
+          <form onSubmit={onSubmit}>
+            <h2 className="text-xl font-bold mb-4">Cập nhật thông tin</h2>
 
-          <div>
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
-              <div className="mb-4 w-full md:w-[200px]">
-                <label className="block text-sm font-medium text-gray-700">Mã chi nhánh:</label>
-                <input
-                  type="text"
-                  required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
-                  {...register("id")}
-                  defaultValue={branchDetailData.id}
-                  readOnly
-                />
+            <div>
+              <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+                <div className="mb-4 w-full md:w-[200px]">
+                  <label className="block text-sm font-medium text-gray-700">Mã chi nhánh:</label>
+                  <input
+                    type="text"
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm outline-none"
+                    {...register("id")}
+                    defaultValue={branchDetailData.id}
+                    readOnly
+                  />
+                </div>
+
+                <div className="mb-4 w-full md:w-[200px]">
+                  <label className="block text-sm font-medium text-gray-700">Tên Chi Nhánh:</label>
+                  <input
+                    type="text"
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+                    defaultValue={branchDetailData.name}
+                    {...register("name")}
+                  />
+                </div>
               </div>
 
               <div className="mb-4 w-full md:w-[200px]">
-                <label className="block text-sm font-medium text-gray-700">Tên Chi Nhánh:</label>
-                <input
-                  type="text"
-                  required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={branchDetailData.name}
-                  {...register("name")}
-                />
-              </div>
-            </div>
-
-            <div className="mb-4 w-full md:w-[200px]">
-              <label className="block text-sm font-medium text-gray-700">Thương Hiệu:</label>
-              <input
-                type="text"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                defaultValue={branchDetailData.trademark}
-                {...register("trademark")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Mô tả:</label>
-              <textarea
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm resize-none"
-                defaultValue={branchDetailData.description}
-                rows={10} // Bạn có thể thay đổi số dòng theo ý muốn
-                {...register("description")}
-              />
-            </div>
-
-            <div className="mb-4 w-full md:w-[300px]">
-              <label className="block text-sm font-medium text-gray-700">URL:</label>
-              <input
-                type="text"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                defaultValue={branchDetailData.url}
-                {...register("url")}
-              />
-            </div>
-
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
-              <div className="mb-4 w-full md:w-[200px]">
-                <label className="block text-sm font-medium text-gray-700">Tỉnh:</label>
+                <label className="block text-sm font-medium text-gray-700">Thương Hiệu:</label>
                 <input
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={branchDetailData.province}
-                  {...register("province")}
+                  defaultValue={branchDetailData.trademark}
+                  {...register("trademark")}
                 />
               </div>
 
-              <div className="mb-4 w-full md:w-[200px]">
-                <label className="block text-sm font-medium text-gray-700">Phường:</label>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Mô tả:</label>
+                <textarea
+                  required
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm resize-none"
+                  defaultValue={branchDetailData.description}
+                  rows={10} // Bạn có thể thay đổi số dòng theo ý muốn
+                  {...register("description")}
+                />
+              </div>
+
+              <div className="mb-4 w-full md:w-[300px]">
+                <label className="block text-sm font-medium text-gray-700">URL:</label>
                 <input
                   type="text"
                   required
                   className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                  defaultValue={branchDetailData.ward}
-                  {...register("ward")}
+                  defaultValue={branchDetailData.url}
+                  {...register("url")}
                 />
               </div>
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Địa Chỉ:</label>
-              <input
-                type="text"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                defaultValue={branchDetailData.location}
-                {...register("location")}
-              />
-            </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Tiện Nghi:</label>
-              <input
-                type="text"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
-                defaultValue={branchDetailData.best_comforts}
-                {...register("best_comforts")}
-              />
-            </div>
+              <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+                <div className="mb-4 w-full md:w-[200px]">
+                  <label className="block text-sm font-medium text-gray-700">Tỉnh:</label>
+                  <input
+                    type="text"
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+                    defaultValue={branchDetailData.province}
+                    {...register("province")}
+                  />
+                </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Hình Ảnh:</label>
-              <div className="flex items-center gap-2">
-                {branchDetailData.images.map((img) => (
-                  <div key={img}>
-                    <img src={img} />
-                  </div>
-                ))}
+                <div className="mb-4 w-full md:w-[200px]">
+                  <label className="block text-sm font-medium text-gray-700">Phường:</label>
+                  <input
+                    type="text"
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+                    defaultValue={branchDetailData.ward}
+                    {...register("ward")}
+                  />
+                </div>
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Địa Chỉ:</label>
+                <input
+                  type="text"
+                  required
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+                  defaultValue={branchDetailData.location}
+                  {...register("location")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Tiện Nghi:</label>
+                <input
+                  type="text"
+                  required
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded text-sm"
+                  defaultValue={branchDetailData.best_comforts}
+                  {...register("best_comforts")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Hình Ảnh:</label>
+                <div className="flex items-center gap-2">
+                  {branchDetailData.images.map((img) => (
+                    <div key={img}>
+                      <img src={img} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-2 justify-end">
+                <button
+                  onClick={handleClear}
+                  type="button"
+                  className="mt-4 py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 duration-200 text-sm"
+                >
+                  Xóa
+                </button>
+                <button
+                  type="submit"
+                  className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 duration-200 text-sm"
+                >
+                  Cập nhật
+                </button>
               </div>
             </div>
-
-            <div className="flex gap-2 justify-end">
-              <button
-                type="submit"
-                className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 duration-200 text-sm"
-              >
-                Cập nhật
-              </button>
-            </div>
-          </div>
-        </form>
-      )}
+          </form>
+        )}
+      </div>
     </div>
   )
 }
