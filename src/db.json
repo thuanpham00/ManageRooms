@@ -206,6 +206,48 @@
         "blob:http://localhost:3000/b52b6514-161b-49a6-ad2b-6bb42ced90e5",
         "blob:http://localhost:3000/8677a4e3-f9bb-4363-8ef9-ee4033fc22ba"
       ]
+    },
+    {
+      "id": "13",
+      "name": "thuannn",
+      "trademark": "qqq",
+      "description": "qqq",
+      "url": "qq",
+      "province": "q",
+      "ward": "q",
+      "location": "q",
+      "best_comforts": "q",
+      "images": [
+        "blob:http://localhost:3000/23c16527-cec8-45e7-aa10-f50c6a8ce299"
+      ]
+    },
+    {
+      "name": "14",
+      "trademark": "14",
+      "description": "14",
+      "url": "14",
+      "province": "14",
+      "ward": "14",
+      "location": "14",
+      "best_comforts": "14",
+      "images": [
+        "blob:http://localhost:3000/bcf7bceb-8db5-49d8-a5f6-b72f3ca0133d"
+      ],
+      "id": "14"
+    },
+    {
+      "id": "15",
+      "name": "15",
+      "trademark": "15",
+      "description": "15",
+      "url": "15",
+      "province": "15",
+      "ward": "15",
+      "location": "15",
+      "best_comforts": "15",
+      "images": [
+        "blob:http://localhost:3000/5dc85d29-a157-408f-96c0-f79d0a17dced"
+      ]
     }
   ],
   "rooms": [
@@ -394,6 +436,48 @@
       "images": [
         "blob:http://localhost:3000/e1c8d034-b072-4609-aa4c-875b158d88a1"
       ]
+    },
+    {
+      "id": "8",
+      "branch_id": "8",
+      "name": "8",
+      "price_per_night": "8",
+      "price_per_month": "8",
+      "description": "8",
+      "bed_type": "8",
+      "comforts": "8",
+      "acreage": "8",
+      "booking_turn": "8",
+      "stock": "8",
+      "available_from": "8",
+      "available_to": "8",
+      "max_adults": "8",
+      "max_children": "8",
+      "max_babies": "8",
+      "images": [
+        "blob:http://localhost:3000/399be98c-c7ce-4687-811f-9853e5eeb9c1"
+      ]
+    },
+    {
+      "branch_id": "a",
+      "price_per_night": "a",
+      "price_per_month": "a",
+      "name": "a",
+      "description": "a",
+      "comforts": "a",
+      "bed_type": "a",
+      "booking_turn": "a",
+      "stock": "a",
+      "acreage": "a",
+      "available_from": "a",
+      "available_to": "a",
+      "max_adults": "a",
+      "max_children": "a",
+      "max_babies": "a",
+      "images": [
+        "blob:http://localhost:3000/115ae906-f029-4183-a88b-d44193433b46"
+      ],
+      "id": "9"
     }
   ],
   "users": [

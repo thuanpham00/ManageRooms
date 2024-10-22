@@ -18,7 +18,7 @@ export default function ListBranch() {
       setTimeout(() => {
         controller.abort()
       }, 10000)
-      return branchAPI.getBranchs(controller.signal)
+      return branchAPI.getBranches(controller.signal)
     },
     retry: 1, // số lần fetch lại khi thất bại
     placeholderData: keepPreviousData, // giữ data cũ

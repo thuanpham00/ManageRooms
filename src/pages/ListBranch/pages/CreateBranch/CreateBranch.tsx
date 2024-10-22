@@ -194,16 +194,13 @@ export default function CreateBranch() {
                 onChange={handleImageChange}
                 className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm"
               />
-              <button type="button" className="underline text-blue-500 text-sm">
-                Thêm
-              </button>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-2">
             {images.map((image, index) => (
               <div key={index} className="relative">
-                <img src={image} alt={`Preview ${index}`} className="w-24 h-24 object-cover rounded" />
+                <img src={image} alt={`Preview ${index}`} className="w-[300px] h-[300px] object-cover rounded" />
                 <button
                   type="button"
                   onClick={() => removeImage(index)}

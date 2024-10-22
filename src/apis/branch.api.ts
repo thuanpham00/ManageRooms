@@ -2,7 +2,7 @@ import { TypeBranch } from "src/types/branches.type"
 import http from "src/utils/http"
 
 export const branchAPI = {
-  getBranchs: (signal?: AbortSignal) => {
+  getBranches: (signal?: AbortSignal) => {
     return http.get<TypeBranch[]>("branches", { signal })
   },
   createBranch: (body: TypeBranch) => {

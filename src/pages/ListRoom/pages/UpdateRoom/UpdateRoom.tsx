@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import { roomAPI } from "src/apis/room.api"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { Helmet } from "react-helmet-async"
+import { useEffect, useState } from "react"
 
 type FormData = TypeRoom
 
@@ -34,7 +35,14 @@ export default function UpdateRoom() {
     }
   })
 
-  const { handleSubmit, register, reset } = useForm<FormData>()
+  const { handleSubmit, register, reset, setValue } = useForm<FormData>()
+  const [images, setImages] = useState<string[]>([])
+
+  useEffect(() => {
+    if (roomDetailData?.images) {
+      setImages(roomDetailData.images)
+    }
+  }, [roomDetailData])
 
   const onSubmit = handleSubmit((data) => {
     const body = {
@@ -53,7 +61,7 @@ export default function UpdateRoom() {
       max_adults: data.max_adults, // Số người lớn tối đa
       max_children: data.max_children, // Số trẻ em tối đa
       max_babies: data.max_babies, // Số trẻ sơ sinh tối đa
-      images: roomDetailData.images // Giả sử bạn không muốn thay đổi hình ảnh
+      images: data.images // Giả sử bạn không muốn thay đổi hình ảnh
     }
 
     updateRoomMutation.mutate(
@@ -95,6 +103,25 @@ export default function UpdateRoom() {
     })
   }
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []) // Lấy danh sách tệp
+    const imageFiles = files.map((file) => URL.createObjectURL(file)) // Tạo URL tạm cho hình ảnh
+    setImages((prev) => {
+      const updatedImages = [...prev, ...imageFiles]
+      setValue("images", updatedImages) // Lưu vào useForm
+      return updatedImages
+    })
+    event.target.value = "" // Đặt lại giá trị của input file để cho phép chọn lại cùng một tệp
+  }
+
+  const removeImage = (index: number) => {
+    setImages((prev) => {
+      const prevMain = prev.filter((_, i) => i !== index)
+      setValue("images", prevMain)
+      return prevMain
+    })
+  }
+
   return (
     <div className="py-4 px-6 relative">
       <Helmet>
@@ -121,7 +148,7 @@ export default function UpdateRoom() {
         <span className="text-sm text-[#3a86ff]">Cập nhật thông tin phòng</span>
       </div>
 
-      {!getRoomDetailQuery.isFetching && (
+      {!getRoomDetailQuery.isFetching && roomDetailData && (
         <form onSubmit={onSubmit} className="mt-2 p-4 bg-white rounded shadow-md">
           <h2 className="text-xl font-bold mb-4">Cập nhật thông tin</h2>
 
@@ -315,9 +342,25 @@ export default function UpdateRoom() {
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">Hình Ảnh:</label>
               <div className="flex items-center gap-2">
-                {roomDetailData.images.map((img) => (
-                  <div key={img}>
-                    <img src={img} />
+                <input
+                  type="file"
+                  multiple // Cho phép chọn nhiều tệp
+                  accept="image/*" // Chỉ cho phép hình ảnh
+                  onChange={handleImageChange}
+                  className="mt-1 block w-[300px] p-2 border border-gray-300 rounded text-sm"
+                />
+              </div>
+              <div className="mt-4 flex items-center gap-2">
+                {images?.map((img, index) => (
+                  <div key={img} className="relative">
+                    <img src={img} alt={`Preview ${img}`} className="w-[300px] h-[300px] object-cover rounded" />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                    >
+                      &times;
+                    </button>
                   </div>
                 ))}
               </div>

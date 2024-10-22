@@ -278,7 +278,7 @@ export default function CreateRoom() {
           <div className="flex flex-wrap gap-2">
             {images.map((image, index) => (
               <div key={index} className="relative">
-                <img src={image} alt={`Preview ${index}`} className="w-24 h-24 object-cover rounded" />
+                <img src={image} alt={`Preview ${index}`} className="w-[300px] h-[300px] object-cover rounded" />
                 <button
                   type="button"
                   onClick={() => removeImage(index)}

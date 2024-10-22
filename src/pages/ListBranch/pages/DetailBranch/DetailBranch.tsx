@@ -162,8 +162,8 @@ export default function DetailBranch() {
               <label className="block text-sm font-medium text-gray-700">Hình Ảnh:</label>
               <div className="flex items-center gap-2">
                 {branchDetailData.images.map((img) => (
-                  <div key={img}>
-                    <img src={img} />
+                  <div key={img} className="w-[300px] h-[300px]">
+                    <img src={img} alt={`preview ${img}`} className="w-full h-full object-cover rounded"/>
                   </div>
                 ))}
               </div>
