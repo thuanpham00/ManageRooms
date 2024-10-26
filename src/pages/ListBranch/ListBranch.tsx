@@ -1,7 +1,8 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { branchAPI } from "src/apis/branch.api"
 import Pagination from "src/components/Pagination"
 import { path } from "src/constants/path"
@@ -9,6 +10,7 @@ import { TypeBranch } from "src/types/branches.type"
 
 export default function ListBranch() {
   const [currentPage, setCurrentPage] = useState(1)
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
 
   const getBranchListQuery = useQuery({
@@ -24,6 +26,21 @@ export default function ListBranch() {
     placeholderData: keepPreviousData, // giữ data cũ
     staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
   })
+
+  const deleteBranchMutation = useMutation({
+    mutationFn: (id: string) => {
+      return branchAPI.deleteBranch(id)
+    }
+  })
+
+  const handleDeleteBranch = (id: string) => {
+    deleteBranchMutation.mutate(id, {
+      onSuccess: () => {
+        toast.success("Xóa chi nhánh thành công")
+        queryClient.invalidateQueries({ queryKey: ["branchList", currentPage] })
+      }
+    })
+  }
 
   const listBranch = (getBranchListQuery.data?.data as TypeBranch[]) || []
 
@@ -177,7 +194,7 @@ export default function ListBranch() {
                           />
                         </svg>
                       </button>
-                      <button>
+                      <button onClick={() => handleDeleteBranch(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

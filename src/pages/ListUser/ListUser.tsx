@@ -26,6 +26,21 @@ export default function ListUser() {
     staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
   })
 
+  const deleteUserMutation = useMutation({
+    mutationFn: (id: string) => {
+      return userAPI.deleteUser(id)
+    }
+  })
+
+  const handleDeleteUser = (id: string) => {
+    deleteUserMutation.mutate(id, {
+      onSuccess: () => {
+        toast.success("Xóa người dùng thành công")
+        queryClient.invalidateQueries({ queryKey: ["userList", currentPage] })
+      }
+    })
+  }
+
   const listRoom = (getUserListQuery.data?.data as TypeUser[]) || []
 
   const totalItem = 5
@@ -42,21 +57,6 @@ export default function ListUser() {
   const handleUpdateUser = (id: string) => {
     navigate(`${path.listUser}/edit/${id}`, {
       state: currentPage
-    })
-  }
-
-  const deleteUserMutation = useMutation({
-    mutationFn: (id: string) => {
-      return userAPI.deleteUser(id)
-    }
-  })
-
-  const handleDeleteUser = (id: string) => {
-    deleteUserMutation.mutate(id, {
-      onSuccess: () => {
-        toast.success("Xóa người dùng thành công")
-        queryClient.invalidateQueries({ queryKey: ["userList", currentPage] })
-      }
     })
   }
 
@@ -118,7 +118,10 @@ export default function ListUser() {
           <div className="w-full">
             {!getUserListQuery.isFetching &&
               currentList.map((item) => (
-                <div key={item.id} className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                <div
+                  key={item.id}
+                  className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+                >
                   <div className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1">{item.id}</div>
                   <div className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1 truncate">
                     {item.fullname}

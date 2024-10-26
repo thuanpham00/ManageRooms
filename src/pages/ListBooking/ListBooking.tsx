@@ -26,6 +26,21 @@ export default function ListBooking() {
     staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
   })
 
+  const deleteUserMutation = useMutation({
+    mutationFn: (id: string) => {
+      return bookingAPI.deleteBooking(id)
+    }
+  })
+
+  const handleDeleteUser = (id: string) => {
+    deleteUserMutation.mutate(id, {
+      onSuccess: () => {
+        toast.success("Xóa booking thành công")
+        queryClient.invalidateQueries({ queryKey: ["bookingList", currentPage] })
+      }
+    })
+  }
+
   const listBooking = (getBookingListQuery.data?.data as TypeBooking[]) || []
 
   const totalItem = 5
@@ -42,21 +57,6 @@ export default function ListBooking() {
   const handleUpdateBooking = (id: string) => {
     navigate(`${path.listBooking}/edit/${id}`, {
       state: currentPage
-    })
-  }
-
-  const deleteUserMutation = useMutation({
-    mutationFn: (id: string) => {
-      return bookingAPI.deleteBooking(id)
-    }
-  })
-
-  const handleDeleteUser = (id: string) => {
-    deleteUserMutation.mutate(id, {
-      onSuccess: () => {
-        toast.success("Xóa booking thành công")
-        queryClient.invalidateQueries({ queryKey: ["bookingList", currentPage] })
-      }
     })
   }
 
@@ -118,7 +118,10 @@ export default function ListBooking() {
           <div className="w-full">
             {!getBookingListQuery.isFetching &&
               currentList.map((item) => (
-                <div key={item.id} className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                <div
+                  key={item.id}
+                  className="border-b border-b-gray-300 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+                >
                   <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1">{item.id}</td>
                   <td className="border-r border-r-gray-300 py-2 px-4 text-center text-sm col-span-1 truncate">
                     {item.fullname_order}

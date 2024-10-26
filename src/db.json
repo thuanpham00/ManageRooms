@@ -1,41 +1,6 @@
 {
   "branches": [
     {
-      "name": "d",
-      "trademark": "d",
-      "description": "d",
-      "url": "d",
-      "province": "d",
-      "ward": "d",
-      "location": "d",
-      "best_comforts": "d",
-      "images": [
-        "blob:http://localhost:3000/4c0b117a-30b3-4b86-8778-92b30bc038a1"
-      ],
-      "id": "0"
-    },
-    {
-      "id": "1",
-      "name": "Thảo Điền Village",
-      "trademark": "luxury_gardens_village",
-      "description": [
-        "Một nơi tuyệt vời để thư giãn với không gian xanh và hồ bơi ngoài trời. Phù hợp cho các gia đình và nhóm bạn.",
-        "Tận hưởng buổi chiều yên tĩnh bên tách trà tại Tea Garden hoặc rèn luyện sức khỏe tại phòng gym hiện đại."
-      ],
-      "url": "m-village-thao-dien",
-      "province": "ho_chi_minh",
-      "ward": "quan_2",
-      "best_comforts": [
-        "outdoor_pool",
-        "luxury_spa"
-      ],
-      "location": "25 Nguyễn Văn Hưởng, P. Thảo Điền, Q.2, HCM",
-      "images": [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZS1k5E44yjGLHBkM_Ul-SKfvXryNpFttaMQ&s",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZS1k5E44yjGLHBkM_Ul-SKfvXryNpFttaMQ&s"
-      ]
-    },
-    {
       "id": "2",
       "name": "Phú Mỹ Hưng Plaza",
       "trademark": "modern_hotel_saigon",
@@ -123,158 +88,196 @@
       ]
     },
     {
-      "name": "vung tau",
-      "trademark": "a",
-      "description": "a",
-      "url": "a",
-      "province": "a",
-      "ward": "a",
-      "location": "a",
-      "best_comforts": "a",
-      "images": [
-        "blob:http://localhost:3000/5358d5fc-38e3-4bf2-96a2-744d8bbce1b8"
+      "id": "6",
+      "name": "Sài Gòn Sky Hotel",
+      "trademark": "sky_hotel_saigon",
+      "description": [
+        "Khách sạn tọa lạc tại trung tâm thành phố, mang đến sự tiện nghi và sang trọng cho các du khách.",
+        "Phòng nghỉ hiện đại và đa dạng, cùng với khu vực giải trí và nhà hàng cao cấp."
       ],
-      "id": "6"
-    },
-    {
-      "name": "minh thuan ne",
-      "trademark": "ga",
-      "description": "ga",
-      "url": "ag",
-      "province": "a",
-      "ward": "a",
-      "location": "a",
-      "best_comforts": "a",
-      "images": [
-        "blob:http://localhost:3000/f2cc506e-363e-47d0-88ad-eabf1896bebb"
+      "url": "saigon-sky-hotel",
+      "province": "ho_chi_minh",
+      "ward": "quan_1",
+      "best_comforts": [
+        "spa",
+        "fitness_center"
       ],
-      "id": "7"
-    },
-    {
-      "id": "8",
-      "name": "nn",
-      "trademark": "nn",
-      "description": "nn",
-      "url": "nnn",
-      "province": "n",
-      "ward": "n",
-      "location": "n",
-      "best_comforts": "n",
+      "location": "45 Lê Lợi, P. Bến Nghé, Q.1, HCM",
       "images": [
-        "blob:http://localhost:3000/1e73c44e-d501-43f3-a235-3fb0b7983b3f"
+        "media/1729148996106-saigon1.jpg.webp",
+        "media/1729148996107-saigon2.jpg.webp"
       ]
     },
     {
-      "name": "nha trang",
-      "trademark": "cc",
-      "description": "cc",
-      "url": "cc",
-      "province": "cc",
-      "ward": "ccc",
-      "location": "cc",
-      "best_comforts": "cc",
-      "images": [
-        "blob:http://localhost:3000/a6bc7875-4b7d-405f-bacd-905d65178263"
+      "id": "7",
+      "name": "Da Nang Beach Resort",
+      "trademark": "beach_resort_danang",
+      "description": [
+        "Khách sạn nằm ngay trên bãi biển Đà Nẵng, mang đến không gian nghỉ dưỡng lý tưởng cho du khách.",
+        "Phòng nghỉ hướng biển, với dịch vụ nhà hàng và hồ bơi ngoài trời."
       ],
-      "id": "10"
+      "url": "da-nang-beach-resort",
+      "province": "da_nang",
+      "ward": "son_tra",
+      "best_comforts": [
+        "beach_access",
+        "swimming_pool"
+      ],
+      "location": "123 Võ Nguyên Giáp, P. Mân Thái, Sơn Trà, Đà Nẵng",
+      "images": [
+        "media/1729148996108-danang1.jpg.webp",
+        "media/1729148996109-danang2.jpg.webp"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Hà Nội Garden Hotel",
+      "trademark": "garden_hotel_hanoi",
+      "description": [
+        "Khách sạn nằm ở trung tâm khu phố cổ Hà Nội, mang đến không gian yên bình và tiện nghi cho du khách.",
+        "Phòng nghỉ rộng rãi, thiết kế đẹp mắt với nhà hàng phục vụ các món ăn truyền thống Việt Nam."
+      ],
+      "url": "hanoi-garden-hotel",
+      "province": "ha_noi",
+      "ward": "hoan_kiem",
+      "best_comforts": [
+        "garden",
+        "restaurant"
+      ],
+      "location": "78 Hàng Trống, P. Hàng Trống, Hoàn Kiếm, Hà Nội",
+      "images": [
+        "media/1729148996110-hanoi1.jpg.webp",
+        "media/1729148996111-hanoi2.jpg.webp"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Phan Thiết Ocean Villa",
+      "trademark": "ocean_villa_phanthiet",
+      "description": [
+        "Khu nghỉ dưỡng nằm sát biển Phan Thiết, mang đến trải nghiệm nghỉ dưỡng tuyệt vời với không gian xanh mát.",
+        "Phòng nghỉ biệt lập với view biển, hồ bơi riêng và khu vực BBQ ngoài trời."
+      ],
+      "url": "phan-thiet-ocean-villa",
+      "province": "binh_thuan",
+      "ward": "mui_ne",
+      "best_comforts": [
+        "private_pool",
+        "bbq_area"
+      ],
+      "location": "200 Nguyễn Đình Chiểu, Mũi Né, Phan Thiết, Bình Thuận",
+      "images": [
+        "media/1729148996112-phanthiet1.jpg.webp",
+        "media/1729148996113-phanthiet2.jpg.webp"
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Vũng Tàu Pearl Hotel",
+      "trademark": "pearl_hotel_vungtau",
+      "description": [
+        "Khách sạn tọa lạc tại vị trí trung tâm của thành phố biển Vũng Tàu, với không gian hiện đại và tiện nghi.",
+        "Phòng nghỉ thoải mái, hồ bơi và nhà hàng phục vụ các món hải sản tươi ngon."
+      ],
+      "url": "vung-tau-pearl-hotel",
+      "province": "ba_ria_vung_tau",
+      "ward": "thanh_pho_vung_tau",
+      "best_comforts": [
+        "sea_view",
+        "swimming_pool"
+      ],
+      "location": "89 Trần Phú, TP. Vũng Tàu, Bà Rịa - Vũng Tàu",
+      "images": [
+        "media/1729148996114-vungtau1.jpg.webp",
+        "media/1729148996115-vungtau2.jpg.webp"
+      ]
     },
     {
       "id": "11",
-      "name": "aaa",
-      "trademark": "aa",
-      "description": "aa",
-      "url": "aaa",
-      "province": "aa",
-      "ward": "aaa",
-      "location": "aa",
-      "best_comforts": "aaa",
+      "name": "Sapa Mountain Retreat",
+      "trademark": "mountain_retreat_sapa",
+      "description": [
+        "Khách sạn nằm giữa núi rừng Sapa, mang đến không gian nghỉ dưỡng trong lành với view nhìn ra dãy Hoàng Liên Sơn.",
+        "Phòng nghỉ ấm cúng, thiết kế mộc mạc và nhà hàng phục vụ các món ăn dân tộc."
+      ],
+      "url": "sapa-mountain-retreat",
+      "province": "lao_cai",
+      "ward": "sapa",
+      "best_comforts": [
+        "mountain_view",
+        "restaurant"
+      ],
+      "location": "456 Điện Biên Phủ, Thị xã Sapa, Lào Cai",
       "images": [
-        "blob:http://localhost:3000/71ad85c1-7cc4-45ee-a3bd-8632714b4618"
+        "media/1729148996116-sapa1.jpg.webp",
+        "media/1729148996117-sapa2.jpg.webp"
       ]
     },
     {
       "id": "12",
-      "name": "thaun neee",
-      "trademark": "111",
-      "description": "1111",
-      "url": "1111",
-      "province": "111",
-      "ward": "1111",
-      "location": "111",
-      "best_comforts": "1111",
+      "name": "Nha Trang Marina Hotel",
+      "trademark": "marina_hotel_nhatrang",
+      "description": [
+        "Khách sạn nằm dọc bờ biển Nha Trang, mang đến sự thoải mái và dịch vụ cao cấp cho du khách.",
+        "Phòng nghỉ sang trọng với view biển, cùng với dịch vụ spa và hồ bơi vô cực."
+      ],
+      "url": "nha-trang-marina-hotel",
+      "province": "khanh_hoa",
+      "ward": "nha_trang",
+      "best_comforts": [
+        "infinity_pool",
+        "spa"
+      ],
+      "location": "18 Trần Phú, Nha Trang, Khánh Hòa",
       "images": [
-        "blob:http://localhost:3000/b52b6514-161b-49a6-ad2b-6bb42ced90e5",
-        "blob:http://localhost:3000/8677a4e3-f9bb-4363-8ef9-ee4033fc22ba"
+        "media/1729148996118-nhatrang1.jpg.webp",
+        "media/1729148996119-nhatrang2.jpg.webp"
       ]
     },
     {
       "id": "13",
-      "name": "thuannn",
-      "trademark": "qqq",
-      "description": "qqq",
-      "url": "qq",
-      "province": "q",
-      "ward": "q",
-      "location": "q",
-      "best_comforts": "q",
+      "name": "Huế Imperial Hotel",
+      "trademark": "imperial_hotel_hue",
+      "description": [
+        "Khách sạn nằm gần Kinh thành Huế, mang đến không gian cổ kính và sang trọng cho các du khách.",
+        "Phòng nghỉ rộng rãi, dịch vụ nhà hàng và phòng hội nghị cao cấp."
+      ],
+      "url": "hue-imperial-hotel",
+      "province": "thua_thien_hue",
+      "ward": "phu_nhuan",
+      "best_comforts": [
+        "conference_room",
+        "restaurant"
+      ],
+      "location": "22 Hùng Vương, P. Phú Nhuận, TP. Huế",
       "images": [
-        "blob:http://localhost:3000/23c16527-cec8-45e7-aa10-f50c6a8ce299"
+        "media/1729148996120-hue1.jpg.webp",
+        "media/1729148996121-hue2.jpg.webp"
       ]
     },
     {
-      "name": "14",
-      "trademark": "14",
-      "description": "14",
-      "url": "14",
-      "province": "14",
-      "ward": "14",
-      "location": "14",
-      "best_comforts": "14",
-      "images": [
-        "blob:http://localhost:3000/bcf7bceb-8db5-49d8-a5f6-b72f3ca0133d"
+      "id": "14",
+      "name": "Hạ Long Bay Resort",
+      "trademark": "bay_resort_halong",
+      "description": [
+        "Khu nghỉ dưỡng 5 sao tọa lạc bên bờ vịnh Hạ Long, mang đến không gian sang trọng và đầy đủ tiện nghi.",
+        "Phòng nghỉ hướng biển, dịch vụ spa và nhà hàng với các món hải sản tươi sống."
       ],
-      "id": "14"
-    },
-    {
-      "id": "15",
-      "name": "15",
-      "trademark": "15",
-      "description": "15",
-      "url": "15",
-      "province": "15",
-      "ward": "15",
-      "location": "15",
-      "best_comforts": "15",
+      "url": "ha-long-bay-resort",
+      "province": "quang_ninh",
+      "ward": "bai_chay",
+      "best_comforts": [
+        "sea_view",
+        "spa"
+      ],
+      "location": "99 Hạ Long, P. Bãi Cháy, TP. Hạ Long, Quảng Ninh",
       "images": [
-        "blob:http://localhost:3000/5dc85d29-a157-408f-96c0-f79d0a17dced"
+        "media/1729148996122-halong1.jpg.webp",
+        "media/1729148996123-halong2.jpg.webp"
       ]
     }
   ],
   "rooms": [
-    {
-      "branch_id": "d",
-      "price_per_night": "d",
-      "price_per_month": "d",
-      "name": "d",
-      "description": "d",
-      "comforts": "d",
-      "bed_type": "d",
-      "booking_turn": "d",
-      "stock": "d",
-      "acreage": "0",
-      "available_from": "d",
-      "available_to": "d",
-      "max_adults": "d",
-      "max_children": "d",
-      "max_babies": "d",
-      "images": [
-        "media/1729149043373-12uhaawdhdhhaw.jpg.webp",
-        "media/1729149043379-1212631.jpg.webp",
-        "media/1729149043380-1230288.jpg.webp",
-        "media/1729149043382-1231048.jpg.webp"
-      ],
-      "id": "1"
-    },
     {
       "id": "2",
       "branch_id": "2",
@@ -436,83 +439,156 @@
       "images": [
         "blob:http://localhost:3000/e1c8d034-b072-4609-aa4c-875b158d88a1"
       ]
-    },
-    {
-      "id": "8",
-      "branch_id": "8",
-      "name": "8",
-      "price_per_night": "8",
-      "price_per_month": "8",
-      "description": "8",
-      "bed_type": "8",
-      "comforts": "8",
-      "acreage": "8",
-      "booking_turn": "8",
-      "stock": "8",
-      "available_from": "8",
-      "available_to": "8",
-      "max_adults": "8",
-      "max_children": "8",
-      "max_babies": "8",
-      "images": [
-        "blob:http://localhost:3000/399be98c-c7ce-4687-811f-9853e5eeb9c1"
-      ]
-    },
-    {
-      "branch_id": "a",
-      "price_per_night": "a",
-      "price_per_month": "a",
-      "name": "a",
-      "description": "a",
-      "comforts": "a",
-      "bed_type": "a",
-      "booking_turn": "a",
-      "stock": "a",
-      "acreage": "a",
-      "available_from": "a",
-      "available_to": "a",
-      "max_adults": "a",
-      "max_children": "a",
-      "max_babies": "a",
-      "images": [
-        "blob:http://localhost:3000/115ae906-f029-4183-a88b-d44193433b46"
-      ],
-      "id": "9"
     }
   ],
   "users": [
     {
-      "email": "bbb",
-      "phone": "bbb",
-      "fullname": "bbb",
-      "nationality": "bbb",
-      "last_booking": "bb",
-      "nights": "b",
-      "books": "bb",
-      "create_at": "",
-      "update_at": "Sat Oct 19 2024 08:04:24 GMT+0700 (Indochina Time)",
-      "roles": "b",
-      "id": "1"
+      "id": "1",
+      "email": "john.doe@example.com",
+      "phone": "123456789",
+      "fullname": "John Doe",
+      "nationality": "USA",
+      "last_booking": "2024-09-15",
+      "nights": 3,
+      "books": 2,
+      "create_at": "2024-01-10",
+      "update_at": "2024-09-16",
+      "roles": [
+        "admin",
+        "user"
+      ]
+    },
+    {
+      "id": "2",
+      "email": "jane.smith@example.com",
+      "phone": "987654321",
+      "fullname": "Jane Smith",
+      "nationality": "UK",
+      "last_booking": "2024-08-22",
+      "nights": 5,
+      "books": 3,
+      "create_at": "2023-11-05",
+      "update_at": "2024-08-23",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": "5",
+      "email": "william.taylor@example.com",
+      "phone": "159753486",
+      "fullname": "William Taylor",
+      "nationality": "New Zealand",
+      "last_booking": "2024-06-25",
+      "nights": 4,
+      "books": 2,
+      "create_at": "2024-03-07",
+      "update_at": "2024-06-26",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": "6",
+      "email": "olivia.white@example.com",
+      "phone": "789654123",
+      "fullname": "Olivia White",
+      "nationality": "USA",
+      "last_booking": "2024-05-30",
+      "nights": 6,
+      "books": 4,
+      "create_at": "2023-12-19",
+      "update_at": "2024-05-31",
+      "roles": [
+        "user",
+        "manager"
+      ]
+    },
+    {
+      "id": "7",
+      "email": "daniel.miller@example.com",
+      "phone": "654987321",
+      "fullname": "Daniel Miller",
+      "nationality": "Germany",
+      "last_booking": "2024-09-05",
+      "nights": null,
+      "books": 3,
+      "create_at": "2024-01-29",
+      "update_at": "2024-09-06",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": "8",
+      "email": "isabella.wilson@example.com",
+      "phone": "951753468",
+      "fullname": "Isabella Wilson",
+      "nationality": "France",
+      "last_booking": "2024-07-14",
+      "nights": 1,
+      "books": 1,
+      "create_at": "2024-05-01",
+      "update_at": "2024-07-15",
+      "roles": [
+        "user"
+      ]
     }
   ],
   "bookings": [
     {
-      "adults": "0",
-      "children": "0",
-      "babies": "0",
-      "checkin": "m",
-      "checkout": "m",
-      "fullname_order": "m",
-      "email_order": "m",
-      "phone_order": "m",
-      "fullname_customer": "m",
-      "email_customer": "m",
-      "phone_customer": "m",
-      "type": "bbb",
-      "range": "Nights",
-      "room_id": "bb",
-      "note": "0",
-      "id": "1"
+      "id": "1",
+      "adults": 2,
+      "children": 1,
+      "babies": 0,
+      "checkin": "2024-11-01T14:00:00Z",
+      "checkout": "2024-11-05T12:00:00Z",
+      "fullname_order": "Nguyễn Văn A",
+      "email_order": "nguyenvana@example.com",
+      "phone_order": "0909123456",
+      "fullname_customer": "Nguyễn Văn A",
+      "email_customer": "nguyenvana@example.com",
+      "phone_customer": "0909123456",
+      "type": "family",
+      "range": "short-term",
+      "room_id": "101",
+      "note": "Phòng gần cửa sổ, yên tĩnh."
+    },
+    {
+      "id": "4",
+      "adults": 2,
+      "children": 0,
+      "babies": 0,
+      "checkin": "2024-12-01T14:00:00Z",
+      "checkout": "2024-12-07T12:00:00Z",
+      "fullname_order": "Lê Thị D",
+      "email_order": "lethid@example.com",
+      "phone_order": "0909444555",
+      "fullname_customer": "Lê Thị D",
+      "email_customer": "lethid@example.com",
+      "phone_customer": "0909444555",
+      "type": "couple",
+      "range": "short-term",
+      "room_id": "104",
+      "note": "Hướng ban công, view biển."
+    },
+    {
+      "id": "5",
+      "adults": 4,
+      "children": 3,
+      "babies": 2,
+      "checkin": "2024-11-15T14:00:00Z",
+      "checkout": "2024-11-18T12:00:00Z",
+      "fullname_order": "Ngô Quang E",
+      "email_order": "ngoquange@example.com",
+      "phone_order": "0909555666",
+      "fullname_customer": "Ngô Quang E",
+      "email_customer": "ngoquange@example.com",
+      "phone_customer": "0909555666",
+      "type": "family",
+      "range": "short-term",
+      "room_id": "105",
+      "note": "Phòng có ban công, cần thêm giường cho trẻ."
     }
   ]
 }

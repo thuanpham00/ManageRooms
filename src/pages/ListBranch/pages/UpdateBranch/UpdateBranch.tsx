@@ -15,7 +15,7 @@ export default function UpdateBranch() {
   const navigate = useNavigate()
   const { state } = useLocation()
 
-  const { nameId } = useParams()
+  const { nameId } = useParams() // lấy tham số định danh từ url
 
   const getBranchDetailQuery = useQuery({
     queryKey: ["branchDetail", nameId],
@@ -56,7 +56,6 @@ export default function UpdateBranch() {
       best_comforts: data.best_comforts,
       images: data.images
     }
-    console.log(data.images)
 
     updateBranchMutation.mutate(
       { id: nameId as string, body },
@@ -86,7 +85,7 @@ export default function UpdateBranch() {
       ward: "",
       location: "",
       best_comforts: [],
-      description: [],
+      description: []
     })
   }
 

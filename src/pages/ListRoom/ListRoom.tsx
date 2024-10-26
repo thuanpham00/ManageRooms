@@ -1,7 +1,8 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { roomAPI } from "src/apis/room.api"
 import Pagination from "src/components/Pagination"
 import { path } from "src/constants/path"
@@ -9,9 +10,10 @@ import { TypeRoom } from "src/types/branches.type"
 
 export default function ListRoom() {
   const [currentPage, setCurrentPage] = useState(1)
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
 
-  const getBranchListQuery = useQuery({
+  const getRoomListQuery = useQuery({
     queryKey: ["roomList", currentPage],
     queryFn: () => {
       const controller = new AbortController()
@@ -25,7 +27,22 @@ export default function ListRoom() {
     staleTime: 5 * 60 * 1000 // dưới 5 phút không refetch api
   })
 
-  const listRoom = (getBranchListQuery.data?.data as TypeRoom[]) || []
+  const deleteRoomMutation = useMutation({
+    mutationFn: (id: string) => {
+      return roomAPI.deleteRoom(id)
+    }
+  })
+
+  const handleDeleteRoom = (id: string) => {
+    deleteRoomMutation.mutate(id, {
+      onSuccess: () => {
+        toast.success("Xóa phòng thành công")
+        queryClient.invalidateQueries({ queryKey: ["roomList", currentPage] })
+      }
+    })
+  }
+
+  const listRoom = (getRoomListQuery.data?.data as TypeRoom[]) || []
 
   const totalItem = 5
   const startIndex = (currentPage - 1) * totalItem
@@ -124,7 +141,7 @@ export default function ListRoom() {
             <div className="py-2 px-4 border-b text-sm text-center col-span-1">Thao tác</div>
           </div>
           <div className="w-full">
-            {!getBranchListQuery.isFetching &&
+            {!getRoomListQuery.isFetching &&
               currentList.map((item) => (
                 <div
                   key={item.id}
@@ -177,7 +194,7 @@ export default function ListRoom() {
                           />
                         </svg>
                       </button>
-                      <button>
+                      <button onClick={() => handleDeleteRoom(item.id as string)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

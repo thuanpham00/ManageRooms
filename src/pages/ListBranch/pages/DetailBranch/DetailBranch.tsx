@@ -5,7 +5,7 @@ import { branchAPI } from "src/apis/branch.api"
 import { TypeBranch } from "src/types/branches.type"
 
 export default function DetailBranch() {
-  const { nameId } = useParams()
+  const { nameId } = useParams() // lấy tham số định danh từ url
 
   const getBranchDetailQuery = useQuery({
     queryKey: ["branchDetail", nameId],

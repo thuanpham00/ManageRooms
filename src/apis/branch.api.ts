@@ -13,5 +13,8 @@ export const branchAPI = {
   },
   updateBranch: ({ id, body }: { id: string; body: TypeBranch }) => {
     return http.put<TypeBranch>(`branches/${id}`, body)
+  },
+  deleteBranch: (id: string) => {
+    return http.delete<TypeBranch>(`branches/${id}`)
   }
 }

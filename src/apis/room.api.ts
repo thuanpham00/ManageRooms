@@ -13,5 +13,8 @@ export const roomAPI = {
   },
   updateRoom: ({ id, body }: { id: string; body: TypeRoom }) => {
     return http.put<TypeRoom>(`rooms/${id}`, body)
+  },
+  deleteRoom: (id: string) => {
+    return http.delete<TypeRoom>(`rooms/${id}`)
   }
 }
